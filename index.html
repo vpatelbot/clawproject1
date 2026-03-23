@@ -5,29 +5,70 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Botworks</title>
   <style>
-    :root { color-scheme: light dark; }
+    :root {
+      color-scheme: light dark;
+      --bg: #0b1020;
+      --panel: rgba(11, 16, 32, 0.72);
+      --text: #f5f7ff;
+      --muted: #cfd6f6;
+      --border: rgba(255, 255, 255, 0.12);
+    }
+
+    * { box-sizing: border-box; }
+
     body {
       margin: 0;
       font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      min-height: 100vh;
       display: grid;
       place-items: center;
-      min-height: 100vh;
-      background: #0b1020;
-      color: #f5f7ff;
-    }
-    main {
-      max-width: 42rem;
       padding: 2rem;
-      text-align: center;
+      background:
+        linear-gradient(rgba(11, 16, 32, 0.25), rgba(11, 16, 32, 0.78)),
+        url("assets/coast.jpg") center / cover no-repeat fixed;
+      color: var(--text);
     }
-    h1 { font-size: clamp(2rem, 6vw, 4rem); margin-bottom: 0.5rem; }
-    p { font-size: 1.1rem; line-height: 1.6; color: #cfd6f6; }
+
+    main {
+      width: min(100%, 56rem);
+      padding: clamp(1.5rem, 3vw, 2.5rem);
+      text-align: center;
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 24px 80px rgba(0, 0, 0, 0.35);
+    }
+
+    h1 {
+      margin: 0 0 0.75rem;
+      font-size: clamp(2.5rem, 7vw, 5rem);
+      line-height: 0.95;
+    }
+
+    p {
+      margin: 0 auto;
+      max-width: 40rem;
+      font-size: 1.1rem;
+      line-height: 1.7;
+      color: var(--muted);
+    }
+
+    .photo {
+      margin-top: 1.75rem;
+      width: 100%;
+      border-radius: 18px;
+      display: block;
+      border: 1px solid var(--border);
+      box-shadow: 0 18px 45px rgba(0, 0, 0, 0.25);
+    }
   </style>
 </head>
 <body>
   <main>
     <h1>Botworks</h1>
-    <p>GitHub Pages is live. This is the starter index page for the repo.</p>
+    <p>Building useful things, one experiment at a time.</p>
+    <img class="photo" src="assets/coast.jpg" alt="Coastal hillside overlooking the ocean and beach">
   </main>
 </body>
 </html>
