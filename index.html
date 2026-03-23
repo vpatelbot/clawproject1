@@ -3,72 +3,503 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Botworks</title>
+  <title>Botworks | SAT Word Trainer</title>
   <style>
     :root {
-      color-scheme: light dark;
-      --bg: #0b1020;
-      --panel: rgba(11, 16, 32, 0.72);
+      color-scheme: dark;
+      --bg: #07111f;
+      --bg-2: #0e1b33;
+      --panel: rgba(12, 22, 42, 0.88);
+      --panel-2: rgba(20, 34, 63, 0.96);
       --text: #f5f7ff;
-      --muted: #cfd6f6;
-      --border: rgba(255, 255, 255, 0.12);
+      --muted: #b8c6f2;
+      --accent: #79a8ff;
+      --accent-2: #9ee6d7;
+      --good: #9ef0b7;
+      --bad: #ffb0b0;
+      --border: rgba(255,255,255,0.12);
+      --shadow: 0 22px 70px rgba(0,0,0,.35);
     }
 
     * { box-sizing: border-box; }
 
     body {
       margin: 0;
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      min-height: 100vh;
-      display: grid;
-      place-items: center;
-      padding: 2rem;
+      font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       background:
-        linear-gradient(rgba(11, 16, 32, 0.25), rgba(11, 16, 32, 0.78)),
-        url("assets/coast.jpg") center / cover no-repeat fixed;
+        radial-gradient(circle at top, rgba(121,168,255,.18), transparent 35%),
+        linear-gradient(160deg, var(--bg), var(--bg-2));
       color: var(--text);
+      min-height: 100vh;
     }
 
-    main {
-      width: min(100%, 56rem);
-      padding: clamp(1.5rem, 3vw, 2.5rem);
-      text-align: center;
-      background: var(--panel);
+    .shell {
+      width: min(1120px, calc(100% - 2rem));
+      margin: 0 auto;
+      padding: 2rem 0 4rem;
+    }
+
+    .hero {
+      padding: 2rem;
       border: 1px solid var(--border);
-      border-radius: 24px;
-      backdrop-filter: blur(10px);
-      box-shadow: 0 24px 80px rgba(0, 0, 0, 0.35);
+      border-radius: 28px;
+      background: linear-gradient(180deg, rgba(18,31,58,.92), rgba(8,16,30,.92));
+      box-shadow: var(--shadow);
+      margin-bottom: 1.5rem;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      margin-bottom: .8rem;
+      padding: .35rem .75rem;
+      border-radius: 999px;
+      background: rgba(121,168,255,.12);
+      color: var(--accent-2);
+      font-size: .9rem;
+      letter-spacing: .03em;
     }
 
     h1 {
-      margin: 0 0 0.75rem;
-      font-size: clamp(2.5rem, 7vw, 5rem);
-      line-height: 0.95;
+      margin: 0;
+      font-size: clamp(2.3rem, 6vw, 4.8rem);
+      line-height: .95;
     }
 
-    p {
-      margin: 0 auto;
-      max-width: 40rem;
-      font-size: 1.1rem;
-      line-height: 1.7;
+    .sub {
+      max-width: 48rem;
+      margin: 1rem 0 0;
       color: var(--muted);
+      font-size: 1.08rem;
+      line-height: 1.7;
     }
 
-    .photo {
-      margin-top: 1.75rem;
-      width: 100%;
-      border-radius: 18px;
-      display: block;
+    .stats {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .75rem;
+      margin-top: 1.25rem;
+    }
+
+    .stat {
+      padding: .8rem 1rem;
       border: 1px solid var(--border);
-      box-shadow: 0 18px 45px rgba(0, 0, 0, 0.25);
+      border-radius: 16px;
+      background: rgba(255,255,255,.04);
+      color: var(--muted);
+      min-width: 140px;
+    }
+
+    .layout {
+      display: grid;
+      grid-template-columns: 1.15fr .85fr;
+      gap: 1.5rem;
+      margin-top: 1.5rem;
+    }
+
+    .panel {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .panel-head {
+      padding: 1.1rem 1.25rem;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: .75rem;
+    }
+
+    .panel-head h2 {
+      margin: 0;
+      font-size: 1.1rem;
+    }
+
+    .controls {
+      display: flex;
+      gap: .6rem;
+      flex-wrap: wrap;
+    }
+
+    button {
+      appearance: none;
+      border: 0;
+      border-radius: 12px;
+      padding: .72rem 1rem;
+      font: inherit;
+      font-weight: 700;
+      cursor: pointer;
+      color: #07111f;
+      background: linear-gradient(135deg, var(--accent), #c1d6ff);
+      transition: transform .15s ease, opacity .15s ease;
+    }
+
+    button.secondary {
+      background: rgba(255,255,255,.08);
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+
+    button:hover { transform: translateY(-1px); }
+    button:disabled { opacity: .45; cursor: not-allowed; transform: none; }
+
+    .flashcard-wrap {
+      padding: 1.25rem;
+    }
+
+    .flashcard {
+      background: linear-gradient(180deg, rgba(21,36,68,.95), rgba(10,18,34,.95));
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 1.4rem;
+      min-height: 390px;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .tag {
+      display: inline-flex;
+      width: fit-content;
+      padding: .35rem .7rem;
+      border-radius: 999px;
+      background: rgba(158,230,215,.12);
+      color: var(--accent-2);
+      font-size: .86rem;
+      font-weight: 700;
+    }
+
+    .word {
+      font-size: clamp(2rem, 5vw, 3.4rem);
+      font-weight: 800;
+      margin: 0;
+    }
+
+    .definition {
+      font-size: 1.08rem;
+      color: var(--text);
+      line-height: 1.7;
+      margin: 0;
+    }
+
+    .memory {
+      border-left: 3px solid var(--accent);
+      padding-left: 1rem;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    .example {
+      padding: 1rem;
+      border-radius: 18px;
+      background: rgba(255,255,255,.04);
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    .word-list {
+      display: grid;
+      gap: .8rem;
+      padding: 1.25rem;
+    }
+
+    .mini-card {
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 1rem;
+      background: rgba(255,255,255,.035);
+    }
+
+    .mini-card h3 {
+      margin: 0 0 .35rem;
+      font-size: 1.05rem;
+    }
+
+    .mini-card p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.55;
+      font-size: .97rem;
+    }
+
+    .quiz {
+      padding: 1.25rem;
+      display: grid;
+      gap: 1rem;
+    }
+
+    .question {
+      padding: 1rem;
+      border-radius: 18px;
+      background: rgba(255,255,255,.04);
+      border: 1px solid var(--border);
+    }
+
+    .question-title {
+      margin: 0 0 .9rem;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    .choices {
+      display: grid;
+      gap: .65rem;
+    }
+
+    .choice {
+      width: 100%;
+      text-align: left;
+      color: var(--text);
+      background: rgba(255,255,255,.06);
+      border: 1px solid var(--border);
+    }
+
+    .choice.correct { background: rgba(158,240,183,.15); color: var(--good); border-color: rgba(158,240,183,.3); }
+    .choice.wrong { background: rgba(255,176,176,.12); color: var(--bad); border-color: rgba(255,176,176,.25); }
+
+    .score {
+      padding: 1rem;
+      border-radius: 18px;
+      background: rgba(121,168,255,.1);
+      color: var(--text);
+      border: 1px solid rgba(121,168,255,.18);
+    }
+
+    footer {
+      margin-top: 1.5rem;
+      color: var(--muted);
+      text-align: center;
+      font-size: .94rem;
+    }
+
+    @media (max-width: 900px) {
+      .layout { grid-template-columns: 1fr; }
+      .shell { width: min(100% - 1rem, 1120px); }
+      .hero, .flashcard-wrap, .word-list, .quiz { padding-left: 1rem; padding-right: 1rem; }
+      .panel-head { align-items: flex-start; flex-direction: column; }
     }
   </style>
 </head>
 <body>
-  <main>
-    <h1>Botworks</h1>
-    <p>Building useful things, one experiment at a time.</p>
-    <img class="photo" src="assets/coast.jpg" alt="Coastal hillside overlooking the ocean and beach">
-  </main>
+  <div class="shell">
+    <section class="hero">
+      <div class="eyebrow">Botworks • SAT Word Trainer</div>
+      <h1>Learn these SAT words without brute-force memorizing them.</h1>
+      <p class="sub">This mini site teaches each word with a plain-English meaning, a memory hook, and an example sentence. Flip through the flashcards, skim the list, then test yourself with the quiz.</p>
+      <div class="stats">
+        <div class="stat"><strong>7 words</strong><br>from your screenshot</div>
+        <div class="stat"><strong>Flashcards</strong><br>one word at a time</div>
+        <div class="stat"><strong>Quick quiz</strong><br>check what stuck</div>
+      </div>
+    </section>
+
+    <section class="layout">
+      <div class="panel">
+        <div class="panel-head">
+          <h2>Flashcard trainer</h2>
+          <div class="controls">
+            <button id="prevBtn" class="secondary">← Previous</button>
+            <button id="shuffleBtn" class="secondary">Shuffle</button>
+            <button id="nextBtn">Next →</button>
+          </div>
+        </div>
+        <div class="flashcard-wrap">
+          <article class="flashcard">
+            <span class="tag" id="cardTag">Word 1 of 7</span>
+            <h2 class="word" id="word"></h2>
+            <p class="definition" id="definition"></p>
+            <div class="memory" id="memory"></div>
+            <div class="example"><strong>Example:</strong> <span id="example"></span></div>
+          </article>
+        </div>
+      </div>
+
+      <div class="panel">
+        <div class="panel-head">
+          <h2>Word bank</h2>
+        </div>
+        <div class="word-list" id="wordList"></div>
+      </div>
+    </section>
+
+    <section class="panel" style="margin-top:1.5rem;">
+      <div class="panel-head">
+        <h2>Quick quiz</h2>
+        <div class="controls">
+          <button id="resetQuizBtn" class="secondary">Reset quiz</button>
+        </div>
+      </div>
+      <div class="quiz" id="quiz"></div>
+    </section>
+
+    <footer>
+      Built to make vocab less annoying.
+    </footer>
+  </div>
+
+  <script>
+    const words = [
+      {
+        word: 'Obviate',
+        partOfSpeech: 'verb',
+        definition: 'to remove the need for something; to make something unnecessary',
+        memory: 'Think: if you obviate a problem, you make it go away before it even needs handling.',
+        example: 'The new medical treatment obviates the need for surgery.'
+      },
+      {
+        word: 'Epitomize',
+        partOfSpeech: 'verb',
+        definition: 'to be the perfect example of something',
+        memory: 'An epitome is a perfect model. To epitomize something is to represent it completely.',
+        example: 'That athlete epitomizes discipline, consistency, and focus.'
+      },
+      {
+        word: 'Buttress',
+        partOfSpeech: 'verb / noun',
+        definition: 'to support or strengthen; also a structure that supports a wall',
+        memory: 'The word sounds like “butt-rest” — a support holding something up so it does not collapse.',
+        example: 'The lawyer used new evidence to buttress her argument.'
+      },
+      {
+        word: 'Ameliorate',
+        partOfSpeech: 'verb',
+        definition: 'to make a bad situation better; to improve',
+        memory: 'Ameliorate means improve, especially when things are already rough.',
+        example: 'The city introduced new policies to ameliorate traffic congestion.'
+      },
+      {
+        word: 'Engender',
+        partOfSpeech: 'verb',
+        definition: 'to cause, produce, or bring about',
+        memory: 'Think “generate.” If something engenders trust, it creates trust.',
+        example: 'A fair leader can engender loyalty in a team.'
+      },
+      {
+        word: 'Enmity',
+        partOfSpeech: 'noun',
+        definition: 'deep hostility, hatred, or animosity',
+        memory: 'Looks a bit like “enemy.” Enmity is the hostile feeling enemies have toward each other.',
+        example: 'Years of rivalry created enmity between the two families.'
+      },
+      {
+        word: 'Prudent',
+        partOfSpeech: 'adjective',
+        definition: 'wise, careful, and sensible',
+        memory: 'A prudent person thinks ahead and avoids reckless choices.',
+        example: 'Saving part of every paycheck is a prudent habit.'
+      }
+    ];
+
+    let order = [...words.keys()];
+    let current = 0;
+
+    const cardTag = document.getElementById('cardTag');
+    const wordEl = document.getElementById('word');
+    const definitionEl = document.getElementById('definition');
+    const memoryEl = document.getElementById('memory');
+    const exampleEl = document.getElementById('example');
+    const wordListEl = document.getElementById('wordList');
+    const quizEl = document.getElementById('quiz');
+
+    function renderCard() {
+      const item = words[order[current]];
+      cardTag.textContent = `Word ${current + 1} of ${words.length} • ${item.partOfSpeech}`;
+      wordEl.textContent = item.word;
+      definitionEl.textContent = item.definition;
+      memoryEl.innerHTML = `<strong>Memory hook:</strong> ${item.memory}`;
+      exampleEl.textContent = item.example;
+    }
+
+    function renderWordList() {
+      wordListEl.innerHTML = words.map((item) => `
+        <article class="mini-card">
+          <h3>${item.word}</h3>
+          <p><strong>${item.partOfSpeech}:</strong> ${item.definition}</p>
+        </article>
+      `).join('');
+    }
+
+    function shuffle() {
+      for (let i = order.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [order[i], order[j]] = [order[j], order[i]];
+      }
+      current = 0;
+      renderCard();
+    }
+
+    function buildQuiz() {
+      const definitions = words.map(w => w.definition);
+      const questions = words.map((item, index) => {
+        const wrong = definitions.filter(d => d !== item.definition).sort(() => Math.random() - 0.5).slice(0, 3);
+        const choices = [item.definition, ...wrong].sort(() => Math.random() - 0.5);
+        return { item, choices, index };
+      });
+
+      quizEl.innerHTML = '';
+      let score = 0;
+      const scoreBox = document.createElement('div');
+      scoreBox.className = 'score';
+      scoreBox.textContent = 'Score: 0 / ' + questions.length;
+      quizEl.appendChild(scoreBox);
+
+      questions.forEach((question, idx) => {
+        const wrap = document.createElement('div');
+        wrap.className = 'question';
+        wrap.innerHTML = `<p class="question-title"><strong>${idx + 1}.</strong> Which definition best matches <strong>${question.item.word}</strong>?</p>`;
+
+        const choicesEl = document.createElement('div');
+        choicesEl.className = 'choices';
+
+        question.choices.forEach(choice => {
+          const btn = document.createElement('button');
+          btn.className = 'choice';
+          btn.textContent = choice;
+          btn.addEventListener('click', () => {
+            if (wrap.dataset.answered === 'true') return;
+            wrap.dataset.answered = 'true';
+
+            [...choicesEl.children].forEach(child => {
+              child.disabled = true;
+              if (child.textContent === question.item.definition) child.classList.add('correct');
+            });
+
+            if (choice === question.item.definition) {
+              btn.classList.add('correct');
+              score += 1;
+            } else {
+              btn.classList.add('wrong');
+            }
+
+            scoreBox.textContent = `Score: ${score} / ${questions.length}`;
+          });
+          choicesEl.appendChild(btn);
+        });
+
+        wrap.appendChild(choicesEl);
+        quizEl.appendChild(wrap);
+      });
+    }
+
+    document.getElementById('prevBtn').addEventListener('click', () => {
+      current = (current - 1 + order.length) % order.length;
+      renderCard();
+    });
+
+    document.getElementById('nextBtn').addEventListener('click', () => {
+      current = (current + 1) % order.length;
+      renderCard();
+    });
+
+    document.getElementById('shuffleBtn').addEventListener('click', shuffle);
+    document.getElementById('resetQuizBtn').addEventListener('click', buildQuiz);
+
+    renderCard();
+    renderWordList();
+    buildQuiz();
+  </script>
 </body>
 </html>
