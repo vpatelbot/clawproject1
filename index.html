@@ -3,28 +3,27 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Motion Notes, But Better</title>
+  <title>Motion Study Studio</title>
   <style>
     :root {
-      --bg: #fff9fb;
-      --bg-2: #fdf2f7;
-      --lavender: #dccdff;
-      --pink: #ffbfd8;
-      --pink-deep: #ff7fad;
-      --coral: #ff9a8b;
-      --peach: #ffd6b8;
-      --aqua: #bfefff;
-      --ocean: #5d88d8;
-      --ink: #2f2940;
-      --muted: #6e6884;
-      --panel: rgba(255,255,255,0.82);
-      --panel-strong: rgba(255,255,255,0.92);
-      --line: rgba(60, 42, 92, 0.10);
-      --shadow: 0 24px 80px rgba(117, 87, 143, 0.12);
-      --radius-xl: 32px;
+      --bg: #f7f7fb;
+      --bg-2: #eef4ff;
+      --navy: #18243f;
+      --indigo: #5c6bd8;
+      --blue: #89cbff;
+      --aqua: #d9f4ff;
+      --pearl: #ffffff;
+      --silver: #dbe4f7;
+      --lavender: #e5defd;
+      --pink: #ffd6e7;
+      --gold: #ffcb8e;
+      --muted: #68728d;
+      --line: rgba(24, 36, 63, 0.10);
+      --shadow: 0 24px 80px rgba(42, 59, 108, 0.10);
+      --radius-xl: 34px;
       --radius-lg: 24px;
       --radius-md: 18px;
-      --max: 1180px;
+      --max: 1200px;
     }
 
     * { box-sizing: border-box; }
@@ -33,10 +32,10 @@
     body {
       margin: 0;
       font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      color: var(--ink);
+      color: var(--navy);
       background:
-        radial-gradient(circle at top left, rgba(255,191,216,0.55), transparent 26%),
-        radial-gradient(circle at top right, rgba(191,239,255,0.55), transparent 24%),
+        radial-gradient(circle at top right, rgba(137,203,255,0.45), transparent 24%),
+        radial-gradient(circle at top left, rgba(229,222,253,0.55), transparent 22%),
         linear-gradient(180deg, var(--bg) 0%, var(--bg-2) 100%);
     }
 
@@ -53,12 +52,12 @@
       top: 0;
       z-index: 20;
       backdrop-filter: blur(16px);
-      background: rgba(255,255,255,0.62);
-      border-bottom: 1px solid rgba(255,255,255,0.58);
+      background: rgba(255,255,255,0.70);
+      border-bottom: 1px solid rgba(255,255,255,0.78);
     }
 
     .nav {
-      min-height: 76px;
+      min-height: 78px;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -66,10 +65,10 @@
     }
 
     .brand {
-      font-size: 1.25rem;
+      font-size: 1.28rem;
       font-weight: 900;
-      letter-spacing: -0.03em;
-      color: #5e4d93;
+      letter-spacing: -0.04em;
+      color: var(--navy);
     }
 
     .nav-links,
@@ -89,243 +88,80 @@
       appearance: none;
       border: 0;
       border-radius: 999px;
-      padding: 0.92rem 1.15rem;
+      padding: 0.92rem 1.18rem;
       font: inherit;
       font-weight: 800;
       cursor: pointer;
-      background: linear-gradient(135deg, var(--pink-deep), var(--coral));
+      background: linear-gradient(135deg, var(--indigo), #7da7ff);
       color: white;
-      box-shadow: 0 18px 38px rgba(255, 127, 173, 0.24);
+      box-shadow: 0 18px 35px rgba(92, 107, 216, 0.22);
       transition: transform .15s ease, box-shadow .15s ease;
     }
 
     .btn:hover { transform: translateY(-1px); }
 
     .btn.secondary {
-      background: rgba(255,255,255,0.62);
-      color: var(--ink);
+      background: rgba(255,255,255,0.78);
+      color: var(--navy);
       border: 1px solid var(--line);
       box-shadow: none;
     }
 
     .hero {
-      padding: 3.5rem 0 2rem;
+      padding: 3.4rem 0 2rem;
       position: relative;
       overflow: hidden;
     }
 
-    .hero::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background:
-        radial-gradient(circle at 16% 10%, rgba(255,255,255,0.85), transparent 18%),
-        radial-gradient(circle at 82% 12%, rgba(220,205,255,0.55), transparent 19%),
-        radial-gradient(circle at 78% 78%, rgba(191,239,255,0.38), transparent 22%);
-      pointer-events: none;
-    }
-
     .hero-grid {
-      position: relative;
-      z-index: 1;
       display: grid;
-      grid-template-columns: 1.08fr 0.92fr;
-      gap: 1.2rem;
+      grid-template-columns: 1.02fr 0.98fr;
+      gap: 1.15rem;
       align-items: stretch;
     }
 
     .hero-copy,
     .hero-visual,
     .section-card {
-      background: var(--panel);
-      border: 1px solid rgba(255,255,255,0.7);
+      background: rgba(255,255,255,0.80);
+      border: 1px solid rgba(255,255,255,0.82);
       border-radius: var(--radius-xl);
       box-shadow: var(--shadow);
+      padding: 1.45rem;
     }
 
-    .hero-copy,
-    .hero-visual,
-    .section-card {
-      padding: 1.4rem;
-    }
-
-    .pill {
+    .eyebrow {
       display: inline-flex;
-      align-items: center;
-      gap: 0.45rem;
-      padding: 0.45rem 0.8rem;
+      padding: 0.46rem 0.82rem;
       border-radius: 999px;
-      background: rgba(255,255,255,0.72);
-      border: 1px solid rgba(94,77,147,0.08);
-      color: #6b5a9a;
+      background: rgba(92,107,216,0.09);
+      color: var(--indigo);
       font-size: 0.82rem;
       font-weight: 800;
-      text-transform: uppercase;
       letter-spacing: 0.08em;
+      text-transform: uppercase;
       margin-bottom: 1rem;
     }
 
     h1 {
       margin: 0;
-      font-size: clamp(2.9rem, 6vw, 5.2rem);
+      font-size: clamp(3rem, 6vw, 5.3rem);
       line-height: 0.92;
       letter-spacing: -0.055em;
     }
 
     .subhead {
-      margin: 1rem 0 1.3rem;
+      margin: 1rem 0 1.35rem;
       color: var(--muted);
       font-size: 1.08rem;
-      line-height: 1.8;
-      max-width: 42rem;
+      line-height: 1.82;
+      max-width: 43rem;
     }
 
-    .hero-notes {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 0.8rem;
-      margin-top: 1.2rem;
-    }
-
-    .hero-note {
-      padding: 1rem;
-      border-radius: 20px;
-      background: linear-gradient(180deg, rgba(255,255,255,0.92), rgba(255,248,252,0.94));
-      border: 1px solid var(--line);
-    }
-
-    .hero-note strong {
-      display: block;
-      margin-bottom: 0.25rem;
-      color: #5f4b94;
-      font-size: 1.1rem;
-    }
-
-    .hero-note span {
-      color: var(--muted);
-      line-height: 1.55;
-      font-size: 0.94rem;
-    }
-
-    .poster {
-      position: relative;
-      min-height: 100%;
-      border-radius: 28px;
-      overflow: hidden;
-      padding: 1rem;
-      background:
-        linear-gradient(180deg, rgba(255,255,255,0.56), rgba(255,255,255,0.9)),
-        linear-gradient(135deg, rgba(220,205,255,0.56), rgba(255,214,184,0.36), rgba(191,239,255,0.42));
-      display: grid;
-      align-content: space-between;
-      gap: 1rem;
-    }
-
-    .poster-top {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      gap: 1rem;
-    }
-
-    .poster-badge {
-      padding: 0.65rem 0.8rem;
-      border-radius: 18px;
-      background: rgba(255,255,255,0.82);
-      border: 1px solid rgba(255,255,255,0.72);
-      color: var(--muted);
-      font-size: 0.92rem;
-      line-height: 1.55;
-      max-width: 220px;
-    }
-
-    .sunset-card {
-      margin-top: 0.6rem;
-      border-radius: 26px;
-      padding: 1rem;
-      background: linear-gradient(180deg, rgba(255,255,255,0.65), rgba(255,255,255,0.9));
-      border: 1px solid rgba(255,255,255,0.8);
-    }
-
-    .sky {
-      position: relative;
-      min-height: 300px;
-      border-radius: 22px;
-      overflow: hidden;
-      background:
-        linear-gradient(180deg, #bce9ff 0%, #f9d5ea 44%, #ffe0bf 70%, #f8ddb0 100%);
-    }
-
-    .sky .sun {
-      position: absolute;
-      right: 1.2rem;
-      top: 1.2rem;
-      width: 84px;
-      height: 84px;
-      border-radius: 50%;
-      background: radial-gradient(circle at 30% 30%, #fffbe8, #ffd0a4 58%, #ff9fa1 100%);
-      box-shadow: 0 0 55px rgba(255, 167, 145, 0.52);
-    }
-
-    .waves {
-      position: absolute;
-      left: 0;
-      right: 0;
-      bottom: 75px;
-      height: 95px;
-      background: linear-gradient(180deg, #86c8f3, #6ca7ec 70%, #5c88d7 100%);
-      clip-path: polygon(0 22%, 10% 14%, 20% 26%, 30% 18%, 41% 25%, 55% 16%, 69% 28%, 81% 21%, 100% 28%, 100% 100%, 0 100%);
-    }
-
-    .sand {
-      position: absolute;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      height: 90px;
-      background: linear-gradient(180deg, #fde9bf, #f5d6a2);
-    }
-
-    .coaster {
-      position: absolute;
-      left: 10%;
-      right: 8%;
-      bottom: 92px;
-      height: 160px;
-    }
-
-    .study-tip {
-      margin-top: 1rem;
-      padding: 1rem;
-      border-radius: 20px;
-      background: rgba(255,255,255,0.86);
-      border: 1px solid var(--line);
-      color: var(--muted);
-      line-height: 1.75;
-    }
-
-    .section { padding: 1rem 0 0; }
-
-    .section-card {
-      margin-top: 1rem;
-      background: var(--panel-strong);
-    }
-
-    h2 {
-      margin: 0 0 0.65rem;
-      font-size: clamp(1.9rem, 3vw, 2.8rem);
-      letter-spacing: -0.04em;
-    }
-
-    .section-lead {
-      margin: 0;
-      color: var(--muted);
-      line-height: 1.8;
-      max-width: 48rem;
-    }
-
+    .hero-tags,
+    .formula-grid,
+    .concept-grid,
     .grid-2,
-    .grid-3,
     .snapshot-grid,
     .quiz-grid {
       display: grid;
@@ -333,81 +169,193 @@
       margin-top: 1.2rem;
     }
 
-    .grid-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-    .grid-3,
+    .hero-tags {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .hero-tag {
+      padding: 1rem;
+      border-radius: 20px;
+      border: 1px solid var(--line);
+      background: linear-gradient(180deg, rgba(255,255,255,0.95), rgba(246,249,255,0.92));
+    }
+
+    .hero-tag strong {
+      display: block;
+      margin-bottom: .3rem;
+      color: var(--indigo);
+      font-size: 1.06rem;
+    }
+
+    .hero-tag span {
+      color: var(--muted);
+      font-size: .94rem;
+      line-height: 1.6;
+    }
+
+    .visual-panel {
+      position: relative;
+      min-height: 100%;
+      border-radius: 28px;
+      overflow: hidden;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.64), rgba(255,255,255,0.92)),
+        linear-gradient(135deg, rgba(229,222,253,0.66), rgba(217,244,255,0.75), rgba(255,214,231,0.48));
+      padding: 1rem;
+      display: grid;
+      align-content: space-between;
+      gap: 1rem;
+    }
+
+    .study-chip {
+      justify-self: start;
+      padding: .65rem .85rem;
+      border-radius: 18px;
+      background: rgba(255,255,255,0.88);
+      color: var(--muted);
+      border: 1px solid rgba(255,255,255,0.82);
+      line-height: 1.55;
+      font-size: .92rem;
+      max-width: 230px;
+    }
+
+    .sunset-scene {
+      position: relative;
+      min-height: 320px;
+      border-radius: 24px;
+      overflow: hidden;
+      background: linear-gradient(180deg, #d6f0ff 0%, #dfe7ff 28%, #ffd9ea 58%, #ffe3bf 100%);
+    }
+
+    .sun {
+      position: absolute;
+      top: 1.15rem;
+      right: 1.15rem;
+      width: 88px;
+      height: 88px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 30% 30%, #fff9ef, #ffd5a3 58%, #ffb2ac 100%);
+      box-shadow: 0 0 60px rgba(255, 185, 155, 0.45);
+    }
+
+    .ocean {
+      position: absolute;
+      left: 0; right: 0; bottom: 78px;
+      height: 98px;
+      background: linear-gradient(180deg, #8ad0ff, #6ea8ef 70%, #6688de);
+      clip-path: polygon(0 24%, 10% 18%, 20% 28%, 32% 17%, 45% 29%, 60% 19%, 73% 31%, 86% 22%, 100% 30%, 100% 100%, 0 100%);
+    }
+
+    .sand {
+      position: absolute;
+      left: 0; right: 0; bottom: 0;
+      height: 88px;
+      background: linear-gradient(180deg, #fde8c2, #f4d3a2);
+    }
+
+    .coaster-track {
+      position: absolute;
+      left: 10%; right: 8%; bottom: 92px;
+      height: 160px;
+    }
+
+    .story-card {
+      padding: 1rem;
+      border-radius: 20px;
+      background: rgba(255,255,255,0.88);
+      border: 1px solid var(--line);
+      color: var(--muted);
+      line-height: 1.75;
+    }
+
+    .section { padding: 1rem 0 0; }
+    .section-card { background: rgba(255,255,255,0.90); }
+
+    h2 {
+      margin: 0 0 .65rem;
+      font-size: clamp(1.95rem, 3vw, 2.85rem);
+      letter-spacing: -0.04em;
+    }
+
+    .section-lead {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.8;
+      max-width: 49rem;
+    }
+
+    .concept-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .formula-grid,
     .snapshot-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .grid-2,
+    .quiz-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 
     .concept-card,
-    .cheat-card,
-    .snapshot,
+    .formula-card,
     .question-card,
-    .formula-card {
-      background: linear-gradient(180deg, rgba(255,255,255,0.96), rgba(252,247,255,0.92));
+    .snapshot,
+    .glance-card {
+      background: linear-gradient(180deg, rgba(255,255,255,0.98), rgba(246,249,255,0.94));
       border: 1px solid var(--line);
       border-radius: 24px;
       padding: 1.2rem;
-      box-shadow: 0 10px 30px rgba(117, 87, 143, 0.05);
+      box-shadow: 0 12px 26px rgba(42, 59, 108, 0.05);
     }
 
     .concept-card h3,
-    .cheat-card h3,
-    .snapshot h3,
+    .formula-card h3,
     .question-card h3,
-    .formula-card h3 {
-      margin: 0 0 0.45rem;
-      font-size: 1.08rem;
-    }
+    .snapshot h3,
+    .glance-card h3 { margin: 0 0 .45rem; font-size: 1.08rem; }
 
     .concept-card p,
-    .cheat-card p,
-    .snapshot p,
+    .formula-card p,
     .question-card p,
-    .formula-card p {
+    .snapshot p,
+    .glance-card p {
       margin: 0;
       color: var(--muted);
       line-height: 1.8;
     }
 
+    .tiny-tag {
+      display: inline-flex;
+      margin-bottom: .75rem;
+      padding: .32rem .65rem;
+      border-radius: 999px;
+      background: rgba(92,107,216,0.10);
+      color: var(--indigo);
+      font-size: .82rem;
+      font-weight: 800;
+    }
+
     .memory-hook {
-      margin-top: 0.85rem;
-      padding-top: 0.85rem;
-      border-top: 1px dashed rgba(95, 75, 148, 0.18);
-      color: #5f4b94;
+      margin-top: .85rem;
+      padding-top: .85rem;
+      border-top: 1px dashed rgba(92,107,216,0.18);
+      color: #4e5cc1;
       font-weight: 700;
       line-height: 1.65;
     }
 
-    .tiny-tag {
-      display: inline-flex;
-      margin-bottom: 0.75rem;
-      padding: 0.32rem 0.65rem;
-      border-radius: 999px;
-      background: rgba(255,191,216,0.18);
-      color: #9b5170;
-      font-size: 0.82rem;
-      font-weight: 800;
-    }
-
-    .formula-card strong { color: #5f4b94; }
-
     .question-card {
       display: grid;
-      gap: 0.9rem;
+      gap: .9rem;
     }
 
     .option-row {
       display: grid;
-      gap: 0.65rem;
+      gap: .65rem;
     }
 
     .option-row button {
       width: 100%;
       text-align: left;
-      padding: 0.9rem 1rem;
-      border-radius: 15px;
+      padding: .92rem 1rem;
+      border-radius: 16px;
       border: 1px solid var(--line);
-      background: rgba(255,255,255,0.94);
-      color: var(--ink);
+      background: rgba(255,255,255,0.95);
+      color: var(--navy);
       font: inherit;
       font-weight: 700;
       cursor: pointer;
@@ -416,13 +364,13 @@
 
     .option-row button:hover {
       transform: translateY(-1px);
-      border-color: rgba(255, 127, 173, 0.32);
+      border-color: rgba(92,107,216,0.28);
     }
 
     .option-row button.correct {
-      background: rgba(96, 203, 160, 0.14);
-      border-color: rgba(96, 203, 160, 0.32);
-      color: #1b7b58;
+      background: rgba(92, 197, 148, 0.14);
+      border-color: rgba(92, 197, 148, 0.30);
+      color: #177551;
     }
 
     .option-row button.wrong {
@@ -439,9 +387,9 @@
       padding: 1rem;
       border-radius: 20px;
       margin-top: 1rem;
-      background: linear-gradient(90deg, rgba(220,205,255,0.34), rgba(255,214,184,0.32));
-      border: 1px solid rgba(95, 75, 148, 0.08);
-      color: #5f4b94;
+      background: linear-gradient(90deg, rgba(229,222,253,0.42), rgba(217,244,255,0.38));
+      border: 1px solid rgba(24, 36, 63, 0.06);
+      color: var(--indigo);
       font-weight: 800;
     }
 
@@ -449,24 +397,25 @@
       border-radius: 18px;
       aspect-ratio: 3 / 4;
       object-fit: cover;
-      margin-top: 0.8rem;
-      border: 1px solid rgba(255,255,255,0.75);
+      margin-top: .8rem;
+      border: 1px solid rgba(255,255,255,0.9);
     }
 
     .footer {
       padding: 2.5rem 0 3rem;
       text-align: center;
       color: var(--muted);
-      font-size: 0.92rem;
+      font-size: .92rem;
     }
 
     @media (max-width: 980px) {
       .hero-grid,
+      .hero-tags,
+      .formula-grid,
+      .concept-grid,
       .grid-2,
-      .grid-3,
       .snapshot-grid,
-      .quiz-grid,
-      .hero-notes { grid-template-columns: 1fr; }
+      .quiz-grid { grid-template-columns: 1fr; }
 
       .nav {
         flex-direction: column;
@@ -479,23 +428,23 @@
       .container { width: min(100% - 1rem, var(--max)); }
       .hero-copy, .hero-visual, .section-card { padding: 1rem; }
       .nav-links, .nav-cta { justify-content: center; }
-      .sky { min-height: 250px; }
+      .sunset-scene { min-height: 260px; }
     }
   </style>
 </head>
 <body>
   <header class="nav-wrap">
     <div class="container nav">
-      <div class="brand">motion notes, but prettier</div>
+      <div class="brand">motion study studio</div>
       <nav class="nav-links">
         <a href="#concepts">Concepts</a>
-        <a href="#memory">Memory tricks</a>
+        <a href="#glance">At a glance</a>
         <a href="#quiz">Quiz</a>
-        <a href="#notes">Your notes</a>
+        <a href="#notes">Notes</a>
       </nav>
       <div class="nav-cta">
-        <a class="btn secondary" href="#notes">Original pages</a>
-        <a class="btn" href="#quiz">Take the quiz</a>
+        <a class="btn secondary" href="#notes">Source pages</a>
+        <a class="btn" href="#quiz">Start practice</a>
       </div>
     </div>
   </header>
@@ -504,58 +453,53 @@
     <section class="hero">
       <div class="container hero-grid">
         <div class="hero-copy">
-          <div class="pill">science formative survival mode</div>
-          <h1>Let’s make motion actually make sense.</h1>
-          <p class="subhead">Instead of repeating your notes word-for-word, this page teaches the same concepts with cleaner design, better wording, and analogies that are easier to remember under pressure. Think: beach-drive energy, not elementary worksheet energy.</p>
+          <div class="eyebrow">science formative prep</div>
+          <h1>Same motion unit. Different vibe.</h1>
+          <p class="subhead">Here’s a second version with a cleaner, more editorial design and a longer quiz. The content still comes from your notes, but it’s explained in a way that feels more like having a smart older cousin teach it than reading a notebook page out loud.</p>
 
-          <div class="hero-notes">
-            <div class="hero-note">
+          <div class="hero-tags">
+            <div class="hero-tag">
               <strong>Speed</strong>
-              <span>Just the number. Like seeing “45 mph” on a dashboard.</span>
+              <span>The raw number: how fast.</span>
             </div>
-            <div class="hero-note">
+            <div class="hero-tag">
               <strong>Velocity</strong>
-              <span>The number plus direction. Like “45 mph toward Malibu.”</span>
+              <span>How fast + which direction.</span>
             </div>
-            <div class="hero-note">
+            <div class="hero-tag">
               <strong>Acceleration</strong>
-              <span>Any change in velocity — faster, slower, or turning.</span>
+              <span>Any change in velocity at all.</span>
             </div>
           </div>
 
           <div class="nav-cta" style="margin-top:1.2rem;">
-            <a class="btn" href="#concepts">Learn the concepts</a>
-            <a class="btn secondary" href="#memory">Get memory tricks</a>
+            <a class="btn" href="#concepts">Study smarter</a>
+            <a class="btn secondary" href="#quiz">Do the longer quiz</a>
           </div>
         </div>
 
         <div class="hero-visual">
-          <div class="poster">
-            <div class="poster-top">
-              <div class="pill">santa monica study edit</div>
-              <div class="poster-badge">Best way to remember it:<br><strong style="color:#5f4b94;">graphs tell stories</strong>, not just lines.</div>
+          <div class="visual-panel">
+            <div class="study-chip">Best mental model:<br><strong style="color:var(--indigo)">motion graphs are mood rings for movement.</strong></div>
+
+            <div class="sunset-scene">
+              <div class="sun"></div>
+              <svg class="coaster-track" viewBox="0 0 600 210" preserveAspectRatio="none" aria-hidden="true">
+                <path d="M20 170 C 96 170, 132 170, 190 124 S 312 16, 378 88 S 484 206, 580 52" stroke="#4355b2" stroke-width="12" fill="none" stroke-linecap="round"/>
+                <path d="M20 170 C 96 170, 132 170, 190 124 S 312 16, 378 88 S 484 206, 580 52" stroke="#ffe5b7" stroke-width="4" fill="none" stroke-linecap="round"/>
+                <line x1="72" y1="170" x2="72" y2="210" stroke="#4355b2" stroke-width="8"/>
+                <line x1="142" y1="168" x2="142" y2="210" stroke="#4355b2" stroke-width="8"/>
+                <line x1="215" y1="100" x2="215" y2="210" stroke="#4355b2" stroke-width="8"/>
+                <line x1="302" y1="42" x2="302" y2="210" stroke="#4355b2" stroke-width="8"/>
+                <line x1="390" y1="103" x2="390" y2="210" stroke="#4355b2" stroke-width="8"/>
+                <line x1="468" y1="165" x2="468" y2="210" stroke="#4355b2" stroke-width="8"/>
+                <line x1="548" y1="88" x2="548" y2="210" stroke="#4355b2" stroke-width="8"/>
+              </svg>
+              <div class="ocean"></div>
+              <div class="sand"></div>
             </div>
 
-            <div class="sunset-card">
-              <div class="sky">
-                <div class="sun"></div>
-                <svg class="coaster" viewBox="0 0 600 210" preserveAspectRatio="none" aria-hidden="true">
-                  <path d="M20 170 C 96 170, 132 170, 190 124 S 312 16, 378 88 S 484 206, 580 52" stroke="#6954a7" stroke-width="12" fill="none" stroke-linecap="round"/>
-                  <path d="M20 170 C 96 170, 132 170, 190 124 S 312 16, 378 88 S 484 206, 580 52" stroke="#ffe4b6" stroke-width="4" fill="none" stroke-linecap="round"/>
-                  <line x1="72" y1="170" x2="72" y2="210" stroke="#6954a7" stroke-width="8"/>
-                  <line x1="142" y1="168" x2="142" y2="210" stroke="#6954a7" stroke-width="8"/>
-                  <line x1="215" y1="100" x2="215" y2="210" stroke="#6954a7" stroke-width="8"/>
-                  <line x1="302" y1="42" x2="302" y2="210" stroke="#6954a7" stroke-width="8"/>
-                  <line x1="390" y1="103" x2="390" y2="210" stroke="#6954a7" stroke-width="8"/>
-                  <line x1="468" y1="165" x2="468" y2="210" stroke="#6954a7" stroke-width="8"/>
-                  <line x1="548" y1="88" x2="548" y2="210" stroke="#6954a7" stroke-width="8"/>
-                </svg>
-                <div class="waves"></div>
-                <div class="sand"></div>
-              </div>
-            </div>
-
-            <div class="study-tip"><strong style="color:#5f4b94;">Core idea:</strong> if the “story” of motion changes in any way — speed changes, direction changes, or both — then velocity changed, which means acceleration happened.</div>
+            <div class="story-card"><strong style="color:var(--indigo)">Quick intuition:</strong> if the line on a distance-time graph changes steepness, speed changed. If the line on a velocity-time graph tilts, acceleration is happening. That’s the whole secret.</div>
           </div>
         </div>
       </div>
@@ -563,79 +507,61 @@
 
     <section class="section" id="concepts">
       <div class="container section-card">
-        <h2>The concepts, explained like a good teacher would</h2>
-        <p class="section-lead">These are your same science ideas, just translated into memorable language so you’re not trying to memorize random vocabulary five minutes before class.</p>
+        <h2>Concepts that actually stick</h2>
+        <p class="section-lead">If you need to understand this fast, the trick is to stop treating each word like isolated vocab and start seeing how they relate.</p>
 
-        <div class="grid-3">
+        <div class="concept-grid">
           <article class="concept-card">
             <div class="tiny-tag">motion</div>
-            <h3>Motion is basically “did your location change?”</h3>
-            <p>If you were sitting on a bench and now you’re walking toward the pier, that’s motion. In science language, motion is a <strong>change in position</strong> compared to a <strong>reference point</strong>.</p>
-            <div class="memory-hook">Memory hook: no comparison point = no way to prove motion. Motion needs a “compared to what?”</div>
+            <h3>Motion is about change in position</h3>
+            <p>If your location changes compared to some reference point, you have motion. No position change = no motion.</p>
+            <div class="memory-hook">Memory hook: motion is basically “before vs. after.”</div>
           </article>
 
           <article class="concept-card">
-            <div class="tiny-tag">reference point + relative motion</div>
-            <h3>Reference point = your “anchor” for judging movement</h3>
-            <p>A parked lifeguard tower can be your reference point. If you move away from it, your position changes. And because different observers can use different reference points, <strong>relative motion</strong> means motion can look different depending on who’s watching.</p>
-            <div class="memory-hook">Think train analogy: to someone inside, you might look still; to someone outside, you’re moving fast.</div>
+            <div class="tiny-tag">reference point</div>
+            <h3>The object you compare everything to</h3>
+            <p>A bench, a building, a tree, or the pier can all be reference points. They help you decide whether position changed.</p>
+            <div class="memory-hook">Ask yourself: compared to what?</div>
           </article>
 
           <article class="concept-card">
-            <div class="tiny-tag">vectors</div>
-            <h3>Vectors are numbers with attitude</h3>
-            <p>A vector has <strong>magnitude</strong> and <strong>direction</strong>. So it doesn’t just say “how much” — it says “how much and where.” That’s why velocity is a vector but speed is not.</p>
-            <div class="memory-hook">Magnitude answers “how much?” Direction answers “which way?” Put them together and you get a vector.</div>
+            <div class="tiny-tag">relative motion</div>
+            <h3>Different observers can disagree</h3>
+            <p>Someone inside a moving car may feel still, while someone outside sees them moving quickly. Motion depends on the observer’s frame.</p>
+            <div class="memory-hook">Relative motion = perspective matters.</div>
           </article>
-        </div>
 
-        <div class="grid-3">
           <article class="concept-card">
             <div class="tiny-tag">speed</div>
-            <h3>Speed is the plain version</h3>
-            <p>Speed only tells <strong>how fast</strong>. No direction. Just the amount. If a car is going <strong>20 m/s</strong>, that’s speed. Formula: <strong>speed = distance ÷ time</strong>.</p>
-            <div class="memory-hook">Dashboard analogy: speed is what your speedometer says. It doesn’t tell you where you’re going.</div>
+            <h3>How fast, period</h3>
+            <p>Speed tells only the amount of motion per time. Units: <strong>m/s</strong>. Formula: <strong>distance ÷ time</strong>.</p>
+            <div class="memory-hook">Speed is the dashboard number.</div>
           </article>
 
           <article class="concept-card">
             <div class="tiny-tag">velocity</div>
-            <h3>Velocity is speed with receipts</h3>
-            <p>Velocity includes direction. So <strong>20 m/s east</strong> is velocity, not just speed. Your notes frame it as <strong>change in distance ÷ change in time</strong>, but the key thing to remember is the direction piece.</p>
-            <div class="memory-hook">If speed is “how fast,” velocity is “how fast and toward where.”</div>
+            <h3>Speed, but specific</h3>
+            <p>Velocity includes direction, like <strong>5 m/s north</strong>. Your notes emphasize that direction is what makes it different.</p>
+            <div class="memory-hook">Velocity = speed with a destination.</div>
           </article>
 
           <article class="concept-card">
             <div class="tiny-tag">acceleration</div>
-            <h3>Acceleration is any change in velocity</h3>
-            <p>A lot of people think acceleration only means speeding up. It doesn’t. If you <strong>speed up</strong>, <strong>slow down</strong>, or <strong>turn</strong>, your velocity changed — so that is acceleration. Formula: <strong>(v<sub>f</sub> − v<sub>i</sub>) ÷ t</strong>.</p>
-            <div class="memory-hook">Acceleration = change. If the motion story changes, acceleration happened.</div>
+            <h3>Any change in velocity</h3>
+            <p>Speeding up, slowing down, or turning all count as acceleration because they all change velocity.</p>
+            <div class="memory-hook">Acceleration = the motion story changed.</div>
           </article>
         </div>
       </div>
     </section>
 
-    <section class="section" id="memory">
+    <section class="section" id="glance">
       <div class="container section-card">
-        <h2>Make it memorable</h2>
-        <p class="section-lead">If you blank during the formative, these are the kinds of mental shortcuts that can pull the answer back into your brain.</p>
+        <h2>At a glance</h2>
+        <p class="section-lead">This is the kind of section you skim right before class when you need the whole unit to compress into one screen.</p>
 
-        <div class="grid-2">
-          <article class="cheat-card">
-            <div class="tiny-tag">graph mindset</div>
-            <h3>Distance vs. time = “How far did I get?”</h3>
-            <p>This graph is about position changing over time, so the slope tells you <strong>speed</strong>.</p>
-            <div class="memory-hook">Flatter line = slower. Steeper line = faster. Flat line = literally not moving. Curving upward = getting faster, so accelerating.</div>
-          </article>
-
-          <article class="cheat-card">
-            <div class="tiny-tag">graph mindset</div>
-            <h3>Velocity vs. time = “What is my motion doing?”</h3>
-            <p>This graph tracks velocity itself, so the slope tells you <strong>acceleration</strong>.</p>
-            <div class="memory-hook">Flat line = no acceleration. Slant up = speeding up. Slant down = slowing down.</div>
-          </article>
-        </div>
-
-        <div class="grid-3">
+        <div class="formula-grid">
           <article class="formula-card">
             <div class="tiny-tag">formula</div>
             <h3>Speed</h3>
@@ -647,22 +573,35 @@
             <p><strong>(v<sub>f</sub> − v<sub>i</sub>) ÷ t</strong><br>Units: <strong>m/s²</strong></p>
           </article>
           <article class="formula-card">
-            <div class="tiny-tag">fact</div>
+            <div class="tiny-tag">constant fact</div>
             <h3>Earth’s gravity</h3>
-            <p><strong>9.8 m/s²</strong><br>That number is worth remembering exactly.</p>
+            <p><strong>9.8 m/s²</strong><br>That exact number matters.</p>
           </article>
         </div>
 
         <div class="grid-2">
-          <article class="cheat-card">
-            <div class="tiny-tag">sample graph reminders</div>
+          <article class="glance-card">
+            <div class="tiny-tag">distance vs. time</div>
+            <h3>What the line means</h3>
+            <p>Straight line = constant speed.<br>Steeper line = faster.<br>Flat line = stopped.<br>Curved up = accelerating.<br><strong>Slope = speed.</strong></p>
+          </article>
+          <article class="glance-card">
+            <div class="tiny-tag">velocity vs. time</div>
+            <h3>What the line means</h3>
+            <p>Flat line = no acceleration.<br>Slant up = speeding up.<br>Slant down = slowing down.<br><strong>Slope = acceleration.</strong></p>
+          </article>
+        </div>
+
+        <div class="grid-2">
+          <article class="glance-card">
+            <div class="tiny-tag">graph sample</div>
             <h3>From your notes</h3>
             <p>Segment <strong>a = 1/2 m/s</strong><br>Segment <strong>b = 0 m/s</strong><br>Segment <strong>c = 2 m/s</strong><br>Average speed <strong>= 5/7 m/s</strong></p>
           </article>
-          <article class="cheat-card">
-            <div class="tiny-tag">fastest distinction</div>
-            <h3>The one everybody mixes up</h3>
-            <p><strong>Speed</strong> is just the number. <strong>Velocity</strong> is the number plus direction. If direction changes, velocity changes — even if the speedometer stays the same.</p>
+          <article class="glance-card">
+            <div class="tiny-tag">most common mix-up</div>
+            <h3>Speed vs. velocity</h3>
+            <p>Speed only answers <em>how fast</em>. Velocity answers <em>how fast and in what direction</em>. Same speed can still mean different velocities if the direction changes.</p>
           </article>
         </div>
       </div>
@@ -670,11 +609,11 @@
 
     <section class="section" id="quiz">
       <div class="container section-card">
-        <h2>Quick practice quiz</h2>
-        <p class="section-lead">No cutesy game. Just useful questions that help you see whether the ideas actually stuck.</p>
+        <h2>Longer quiz</h2>
+        <p class="section-lead">This version has more questions, more scenario-based wording, and more chances to catch the little differences that usually trip people up.</p>
         <div id="quizArea"></div>
         <div class="scorebar">
-          <span id="quizScore">Quiz score: 0 / 6</span>
+          <span id="quizScore">Quiz score: 0 / 12</span>
           <button class="btn secondary" id="resetQuizBtn">Reset quiz</button>
         </div>
       </div>
@@ -682,8 +621,8 @@
 
     <section class="section" id="notes">
       <div class="container section-card">
-        <h2>Your original study pages</h2>
-        <p class="section-lead">I kept the source images on the page so you can compare the polished explanation to your actual notes whenever you want.</p>
+        <h2>Your original note pages</h2>
+        <p class="section-lead">Still here in case you want to cross-check the interactive version against your actual study guide.</p>
         <div class="snapshot-grid">
           <article class="snapshot">
             <h3>Page 1</h3>
@@ -706,40 +645,70 @@
   </main>
 
   <footer class="footer">
-    Built from your notes, but with better taste and better explanations.
+    Version two: cleaner look, more questions, less fluff.
   </footer>
 
   <script>
     const quizQuestions = [
       {
-        question: 'Which quantity tells you how fast something moves but not where it is headed?',
-        answer: 'speed',
-        options: ['speed', 'velocity', 'acceleration', 'vector']
+        question: 'A skateboarder moves 30 meters in 10 seconds. What formula would you use to find speed?',
+        answer: 'distance ÷ time',
+        options: ['distance ÷ time', 'time ÷ distance', '(vf − vi) ÷ t', 'distance × time']
       },
       {
-        question: 'Why is “20 m/s west” velocity instead of just speed?',
-        answer: 'because it includes direction',
-        options: ['because it includes direction', 'because it uses meters', 'because it is accelerating', 'because it is a reference point']
+        question: 'Which quantity tells you only how fast an object is moving?',
+        answer: 'speed',
+        options: ['speed', 'velocity', 'acceleration', 'relative motion']
+      },
+      {
+        question: 'Which choice is an example of velocity?',
+        answer: '8 m/s east',
+        options: ['8 m/s east', '8 m/s', '8 meters', '8 seconds']
+      },
+      {
+        question: 'Why is velocity considered a vector?',
+        answer: 'because it has magnitude and direction',
+        options: ['because it has magnitude and direction', 'because it only uses meters', 'because it is always accelerating', 'because it ignores reference points']
+      },
+      {
+        question: 'A car keeps moving at the same speed but turns left. Is it accelerating?',
+        answer: 'yes, because direction changed',
+        options: ['yes, because direction changed', 'no, because the speed stayed the same', 'only if it speeds up first', 'only if gravity changes']
       },
       {
         question: 'A flat line on a distance vs. time graph means the object is…',
         answer: 'stopped',
-        options: ['stopped', 'speeding up', 'changing direction', 'accelerating downward']
+        options: ['stopped', 'speeding up', 'slowing down', 'moving east']
+      },
+      {
+        question: 'On a distance vs. time graph, a steeper slope means…',
+        answer: 'faster speed',
+        options: ['faster speed', 'more gravity', 'lower acceleration', 'changing direction']
       },
       {
         question: 'On a velocity vs. time graph, slope represents…',
         answer: 'acceleration',
-        options: ['distance', 'acceleration', 'reference point', 'relative motion']
+        options: ['acceleration', 'speed', 'distance', 'reference point']
       },
       {
-        question: 'A car keeps the same speed but turns a corner. Is it accelerating?',
-        answer: 'yes, because direction changed',
-        options: ['yes, because direction changed', 'no, because the speed stayed the same', 'only if it stops first', 'only if gravity changes']
+        question: 'A flat line on a velocity vs. time graph means…',
+        answer: 'no acceleration',
+        options: ['no acceleration', 'stopped', 'zero velocity every time', 'distance is increasing']
+      },
+      {
+        question: 'Relative motion means…',
+        answer: 'motion can look different depending on the observer',
+        options: ['motion can look different depending on the observer', 'all motion has the same speed', 'reference points do not matter', 'vectors have no direction']
       },
       {
         question: 'What is Earth’s gravity according to your notes?',
         answer: '9.8 m/s²',
-        options: ['5/7 m/s', '9.8 m/s²', '2 m/s', '1/2 m/s²']
+        options: ['9.8 m/s²', '5/7 m/s', '2 m/s', '1/2 m/s²']
+      },
+      {
+        question: 'Which situation does NOT count as acceleration?',
+        answer: 'moving in a straight line at constant speed',
+        options: ['moving in a straight line at constant speed', 'speeding up', 'slowing down', 'turning a corner']
       }
     ];
 
@@ -749,7 +718,7 @@
 
     function renderQuiz() {
       currentQuizScore = 0;
-      quizArea.innerHTML = '<div class="quiz-grid grid-2"></div>';
+      quizArea.innerHTML = '<div class="quiz-grid"></div>';
       const grid = quizArea.querySelector('.quiz-grid');
 
       quizQuestions.forEach((item, index) => {
