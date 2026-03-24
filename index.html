@@ -3,27 +3,32 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Thena | Daily Strength, Simplified</title>
+  <title>Santa Monica Motion Coaster</title>
   <style>
     :root {
-      --bg: #f6efe5;
-      --bg-soft: #fbf7f1;
-      --panel: #fffaf4;
-      --ink: #2d241c;
-      --muted: #6f6256;
-      --line: rgba(111, 86, 53, 0.18);
-      --gold: #a98045;
-      --gold-deep: #876432;
-      --gold-soft: #ddc7a1;
-      --shadow: 0 24px 80px rgba(73, 49, 24, 0.12);
-      --radius-xl: 32px;
+      --sky-top: #87d7ff;
+      --sky-mid: #b9ecff;
+      --sky-bottom: #fff6df;
+      --ocean: #0f84b8;
+      --ocean-deep: #0d5e86;
+      --sand: #f3dca7;
+      --sunset: #ff8f6b;
+      --sunset-soft: #ffc28d;
+      --palm: #15624f;
+      --boardwalk: #845d3b;
+      --ink: #123047;
+      --muted: #4b6c7f;
+      --panel: rgba(255,255,255,0.82);
+      --panel-strong: rgba(255,255,255,0.92);
+      --line: rgba(18, 48, 71, 0.12);
+      --shadow: 0 24px 70px rgba(16, 68, 99, 0.16);
+      --radius-xl: 30px;
       --radius-lg: 22px;
       --radius-md: 16px;
       --max: 1180px;
     }
 
     * { box-sizing: border-box; }
-
     html { scroll-behavior: smooth; }
 
     body {
@@ -31,155 +36,132 @@
       font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       color: var(--ink);
       background:
-        radial-gradient(circle at top right, rgba(169, 128, 69, 0.10), transparent 26%),
-        linear-gradient(180deg, var(--bg-soft), var(--bg));
+        linear-gradient(180deg, var(--sky-top) 0%, var(--sky-mid) 28%, var(--sky-bottom) 58%, #fffef9 100%);
     }
 
-    img { max-width: 100%; display: block; }
     a { color: inherit; text-decoration: none; }
+    img { display: block; max-width: 100%; }
 
     .container {
       width: min(var(--max), calc(100% - 2rem));
       margin: 0 auto;
     }
 
-    .topbar {
+    .nav-wrap {
       position: sticky;
       top: 0;
-      z-index: 30;
-      backdrop-filter: blur(12px);
-      background: rgba(246, 239, 229, 0.84);
-      border-bottom: 1px solid var(--line);
+      z-index: 20;
+      backdrop-filter: blur(10px);
+      background: rgba(255,255,255,0.65);
+      border-bottom: 1px solid rgba(255,255,255,0.38);
     }
 
     .nav {
+      min-height: 76px;
       display: flex;
       align-items: center;
       justify-content: space-between;
       gap: 1rem;
-      min-height: 76px;
-    }
-
-    .nav-links {
-      display: flex;
-      gap: 1.25rem;
-      color: var(--muted);
-      font-size: 0.95rem;
-      flex-wrap: wrap;
     }
 
     .brand {
-      font-family: Georgia, "Times New Roman", serif;
-      font-size: 2.2rem;
+      font-weight: 900;
       letter-spacing: -0.04em;
-      color: var(--gold-deep);
+      font-size: 1.5rem;
+      color: var(--ocean-deep);
     }
 
-    .nav-cta {
+    .nav-links, .nav-cta {
       display: flex;
-      gap: 0.75rem;
       align-items: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .nav-links {
+      color: var(--muted);
+      font-size: 0.95rem;
     }
 
     .btn {
       appearance: none;
       border: 0;
-      background: var(--gold);
-      color: #fffdf8;
-      font: inherit;
-      font-weight: 700;
-      padding: 0.95rem 1.2rem;
       border-radius: 999px;
+      padding: 0.9rem 1.15rem;
+      font: inherit;
+      font-weight: 800;
       cursor: pointer;
-      box-shadow: 0 10px 30px rgba(135, 100, 50, 0.18);
-      transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+      background: linear-gradient(135deg, var(--sunset), var(--sunset-soft));
+      color: white;
+      box-shadow: 0 16px 35px rgba(255, 143, 107, 0.24);
+      transition: transform .15s ease, box-shadow .15s ease;
     }
 
-    .btn:hover {
-      transform: translateY(-1px);
-      background: var(--gold-deep);
-      box-shadow: 0 16px 35px rgba(135, 100, 50, 0.22);
-    }
+    .btn:hover { transform: translateY(-1px); box-shadow: 0 20px 38px rgba(255, 143, 107, 0.28); }
 
     .btn.secondary {
-      background: transparent;
+      background: rgba(255,255,255,0.6);
       color: var(--ink);
       border: 1px solid var(--line);
       box-shadow: none;
     }
 
     .hero {
+      position: relative;
+      overflow: hidden;
       padding: 3.5rem 0 2rem;
     }
 
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at 12% 18%, rgba(255,255,255,0.7), transparent 18%),
+        radial-gradient(circle at 80% 18%, rgba(255,194,141,0.42), transparent 22%),
+        linear-gradient(180deg, transparent 55%, rgba(15,132,184,0.08) 100%);
+      pointer-events: none;
+    }
+
     .hero-grid {
+      position: relative;
+      z-index: 1;
       display: grid;
-      grid-template-columns: 0.95fr 1.05fr;
-      gap: 2rem;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 1.4rem;
       align-items: center;
     }
 
-    .gallery-card,
-    .copy-card,
+    .hero-copy,
+    .hero-art,
     .section-card {
-      background: rgba(255, 250, 244, 0.9);
-      border: 1px solid var(--line);
+      background: var(--panel);
+      border: 1px solid rgba(255,255,255,0.54);
       border-radius: var(--radius-xl);
       box-shadow: var(--shadow);
     }
 
-    .gallery-card {
-      padding: 1.25rem;
-    }
-
-    .product-frame {
-      background: linear-gradient(180deg, #efe4d2, #f8f2ea);
-      border-radius: 28px;
-      padding: 1rem;
-      min-height: 100%;
-    }
-
-    .product-frame img {
-      width: 100%;
-      border-radius: 24px;
-      object-fit: cover;
-      box-shadow: 0 18px 45px rgba(60, 41, 21, 0.10);
-    }
-
-    .thumbs {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 0.75rem;
-      margin-top: 0.9rem;
-    }
-
-    .thumb {
-      border: 1px solid var(--line);
-      background: #fff;
-      border-radius: 16px;
-      padding: 0.55rem;
-      text-align: center;
-      color: var(--muted);
-      font-size: 0.84rem;
-    }
-
-    .copy-card {
+    .hero-copy {
       padding: 2rem;
     }
 
     .kicker {
-      color: var(--gold-deep);
+      display: inline-flex;
+      padding: 0.45rem 0.8rem;
+      border-radius: 999px;
+      background: rgba(15,132,184,0.12);
+      color: var(--ocean-deep);
+      font-size: 0.83rem;
+      letter-spacing: 0.08em;
       text-transform: uppercase;
-      letter-spacing: 0.15em;
-      font-size: 0.82rem;
-      font-weight: 700;
-      margin-bottom: 0.85rem;
+      font-weight: 800;
+      margin-bottom: 1rem;
     }
 
     h1 {
       margin: 0;
-      font-size: clamp(2.6rem, 6vw, 4.7rem);
-      line-height: 0.96;
+      font-size: clamp(2.8rem, 6vw, 5rem);
+      line-height: 0.93;
       letter-spacing: -0.05em;
     }
 
@@ -188,78 +170,161 @@
       color: var(--muted);
       font-size: 1.08rem;
       line-height: 1.75;
-      max-width: 40rem;
+      max-width: 42rem;
     }
 
-    .rating-row {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      gap: 1rem;
-      color: var(--muted);
-      font-size: 0.95rem;
-      margin-bottom: 1.2rem;
-    }
-
-    .stars { color: var(--gold); letter-spacing: 0.1em; font-size: 1rem; }
-
-    .stat-grid {
+    .stats {
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
       gap: 0.85rem;
       margin: 1.35rem 0 1.5rem;
     }
 
-    .stat-box {
+    .stat {
       padding: 1rem;
-      border: 1px solid var(--line);
       border-radius: 18px;
-      background: linear-gradient(180deg, #fffdf9, #f7efe4);
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.55);
     }
 
-    .stat-box strong {
+    .stat strong {
       display: block;
       font-size: 1.35rem;
-      margin-bottom: 0.2rem;
-      color: var(--gold-deep);
+      margin-bottom: 0.15rem;
+      color: var(--ocean-deep);
     }
 
-    .pill-row,
-    .benefit-grid,
-    .ingredient-grid,
-    .testimonial-grid,
-    .faq-grid {
-      display: grid;
-      gap: 1rem;
+    .hero-art {
+      padding: 1rem;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.7), rgba(255,255,255,0.88)),
+        linear-gradient(180deg, rgba(135,215,255,0.25), rgba(255,194,141,0.18));
     }
 
-    .pill-row {
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-      margin-top: 1rem;
+    .scene {
+      position: relative;
+      min-height: 510px;
+      border-radius: 26px;
+      overflow: hidden;
+      background:
+        linear-gradient(180deg, #9fe3ff 0%, #c8f1ff 38%, #fdebbd 73%, #f8d88b 100%);
+      border: 1px solid rgba(255,255,255,0.62);
     }
 
-    .pill {
-      border: 1px solid var(--line);
-      border-radius: 999px;
-      padding: 0.8rem 1rem;
-      text-align: center;
-      background: rgba(255,255,255,0.68);
+    .sun {
+      position: absolute;
+      right: 1.3rem;
+      top: 1.2rem;
+      width: 92px;
+      height: 92px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 30% 30%, #fff8d3, #ffc48b 58%, #ff9f7f 100%);
+      box-shadow: 0 0 60px rgba(255, 180, 130, 0.55);
+    }
+
+    .ocean-band {
+      position: absolute;
+      left: 0; right: 0; bottom: 86px;
+      height: 130px;
+      background: linear-gradient(180deg, var(--ocean), var(--ocean-deep));
+      clip-path: polygon(0 20%, 8% 14%, 18% 22%, 28% 15%, 42% 22%, 54% 16%, 68% 25%, 82% 19%, 100% 26%, 100% 100%, 0 100%);
+    }
+
+    .sand-band {
+      position: absolute;
+      left: 0; right: 0; bottom: 0;
+      height: 112px;
+      background: linear-gradient(180deg, #f8e0a5, var(--sand));
+    }
+
+    .pier {
+      position: absolute;
+      left: 12%;
+      bottom: 114px;
+      width: 58%;
+      height: 20px;
+      background: #8b6243;
+      border-radius: 10px;
+      box-shadow: 0 10px 0 rgba(89, 60, 35, 0.18);
+    }
+
+    .pier::before {
+      content: "";
+      position: absolute;
+      inset: 18px 0 auto 0;
+      height: 88px;
+      background: repeating-linear-gradient(90deg, transparent 0 28px, rgba(101,69,43,0.95) 28px 36px);
+      opacity: 0.8;
+    }
+
+    .coaster-track {
+      position: absolute;
+      left: 13%;
+      bottom: 150px;
+      width: 56%;
+      height: 170px;
+      pointer-events: none;
+    }
+
+    .coaster-car {
+      position: absolute;
+      right: 33%;
+      bottom: 278px;
+      width: 92px;
+      height: 48px;
+      border-radius: 16px 16px 10px 10px;
+      background: linear-gradient(180deg, #ff9f7a, #ff6f61);
+      box-shadow: 0 10px 25px rgba(255,111,97,0.25);
+      transform: rotate(-14deg);
+    }
+
+    .coaster-car::before,
+    .coaster-car::after {
+      content: "";
+      position: absolute;
+      bottom: -8px;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: #22546c;
+      box-shadow: inset 0 0 0 4px #e6f6ff;
+    }
+
+    .coaster-car::before { left: 14px; }
+    .coaster-car::after { right: 14px; }
+
+    .flash-badge {
+      position: absolute;
+      right: 1rem;
+      bottom: 1rem;
+      max-width: 250px;
+      padding: 1rem;
+      border-radius: 20px;
+      background: rgba(255,255,255,0.84);
+      border: 1px solid rgba(255,255,255,0.68);
       color: var(--ink);
-      font-weight: 600;
+      box-shadow: var(--shadow);
+    }
+
+    .flash-badge strong {
+      display: block;
+      margin-bottom: 0.25rem;
+      color: var(--ocean-deep);
     }
 
     .section {
-      padding: 1.5rem 0 0;
+      padding: 1rem 0 0;
     }
 
     .section-card {
-      padding: 1.5rem;
+      padding: 1.4rem;
       margin-top: 1rem;
+      background: var(--panel-strong);
     }
 
     h2 {
-      margin: 0 0 0.7rem;
-      font-size: clamp(1.8rem, 3vw, 2.6rem);
+      margin: 0 0 0.65rem;
+      font-size: clamp(1.9rem, 3vw, 2.8rem);
       letter-spacing: -0.04em;
     }
 
@@ -270,332 +335,601 @@
       max-width: 46rem;
     }
 
-    .benefit-grid {
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      margin-top: 1.25rem;
+    .learn-grid,
+    .quiz-grid,
+    .snapshot-grid,
+    .mini-game-grid,
+    .concept-grid {
+      display: grid;
+      gap: 1rem;
+      margin-top: 1.2rem;
     }
 
-    .benefit,
-    .ingredient,
-    .testimonial,
-    .faq,
-    .cta-band {
+    .learn-grid,
+    .concept-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .quiz-grid,
+    .mini-game-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .snapshot-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+
+    .card,
+    .question-card,
+    .snapshot,
+    .game-panel,
+    .coaster-terminal,
+    .formula-box {
+      background: linear-gradient(180deg, rgba(255,255,255,0.95), rgba(247,252,255,0.92));
       border: 1px solid var(--line);
       border-radius: 22px;
-      background: linear-gradient(180deg, #fffdf9, #f8f0e5);
-      padding: 1.25rem;
+      padding: 1.15rem;
+      box-shadow: 0 10px 26px rgba(16, 68, 99, 0.06);
     }
 
-    .benefit .icon,
-    .ingredient .icon {
-      width: 2.5rem;
-      height: 2.5rem;
-      display: grid;
-      place-items: center;
-      border-radius: 999px;
-      background: rgba(169, 128, 69, 0.12);
-      color: var(--gold-deep);
-      font-weight: 800;
-      margin-bottom: 0.8rem;
-    }
+    .card h3,
+    .question-card h3,
+    .snapshot h3,
+    .game-panel h3,
+    .formula-box h3 { margin: 0 0 0.45rem; font-size: 1.08rem; }
 
-    .benefit h3,
-    .ingredient h3,
-    .testimonial h3,
-    .faq h3 {
-      margin: 0 0 0.45rem;
-      font-size: 1.08rem;
-    }
-
-    .benefit p,
-    .ingredient p,
-    .testimonial p,
-    .faq p {
+    .card p,
+    .question-card p,
+    .snapshot p,
+    .game-panel p,
+    .formula-box p,
+    .option-row label,
+    .graph-note {
       margin: 0;
       color: var(--muted);
       line-height: 1.7;
     }
 
-    .ingredient-grid,
-    .testimonial-grid,
-    .faq-grid {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      margin-top: 1.25rem;
+    .tag {
+      display: inline-flex;
+      margin-bottom: .75rem;
+      padding: .34rem .7rem;
+      border-radius: 999px;
+      background: rgba(15,132,184,0.10);
+      color: var(--ocean-deep);
+      font-size: .83rem;
+      font-weight: 800;
     }
 
-    .ingredient strong {
-      display: inline-block;
-      color: var(--gold-deep);
-      margin-bottom: 0.25rem;
-    }
+    .formula-box strong { color: var(--ocean-deep); }
 
-    .cta-band {
+    .question-card {
       display: grid;
-      grid-template-columns: 1.15fr 0.85fr;
-      gap: 1.25rem;
-      align-items: center;
-      margin-top: 1.3rem;
+      gap: .9rem;
     }
 
-    .price {
+    .option-row {
+      display: grid;
+      gap: .6rem;
+    }
+
+    .option-row button {
+      width: 100%;
+      text-align: left;
+      padding: .85rem 1rem;
+      border-radius: 14px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.9);
+      color: var(--ink);
+      cursor: pointer;
+      font: inherit;
+      font-weight: 700;
+      transition: transform .12s ease, border-color .12s ease;
+    }
+
+    .option-row button:hover { transform: translateY(-1px); border-color: rgba(15,132,184,0.28); }
+    .option-row button.correct { background: rgba(25, 177, 117, 0.12); border-color: rgba(25, 177, 117, 0.30); color: #0b6745; }
+    .option-row button.wrong { background: rgba(255, 111, 97, 0.12); border-color: rgba(255, 111, 97, 0.24); color: #a33f34; }
+
+    .scorebar {
       display: flex;
-      align-items: baseline;
-      gap: 0.65rem;
-      margin: 1rem 0;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      padding: 1rem;
+      border-radius: 18px;
+      background: linear-gradient(90deg, rgba(15,132,184,0.10), rgba(255,194,141,0.24));
+      border: 1px solid rgba(15,132,184,0.12);
+      margin-top: 1rem;
+      font-weight: 700;
+      color: var(--ocean-deep);
     }
 
-    .price .main {
-      font-size: 2.4rem;
-      font-weight: 800;
-      letter-spacing: -0.05em;
+    .coaster-terminal {
+      position: relative;
+      overflow: hidden;
+      min-height: 380px;
+      background:
+        linear-gradient(180deg, rgba(159,227,255,0.75), rgba(255,235,189,0.55)),
+        rgba(255,255,255,0.88);
     }
 
-    .price .sub {
+    .ride-area {
+      position: relative;
+      height: 210px;
+      margin-top: .6rem;
+      border-radius: 18px;
+      background:
+        linear-gradient(180deg, rgba(135,215,255,0.62), rgba(248,216,139,0.36));
+      overflow: hidden;
+    }
+
+    .ride-track {
+      position: absolute;
+      inset: 0;
+    }
+
+    .ride-car {
+      position: absolute;
+      left: 8%;
+      top: 56%;
+      width: 62px;
+      height: 34px;
+      border-radius: 14px 14px 10px 10px;
+      background: linear-gradient(180deg, #ff8f6b, #ff6f61);
+      transition: transform .55s ease, left .55s ease, top .55s ease;
+      box-shadow: 0 12px 26px rgba(255, 111, 97, 0.18);
+    }
+
+    .ride-car::before,
+    .ride-car::after {
+      content: "";
+      position: absolute;
+      bottom: -7px;
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: #20566f;
+      box-shadow: inset 0 0 0 3px #dff7ff;
+    }
+
+    .ride-car::before { left: 10px; }
+    .ride-car::after { right: 10px; }
+
+    .ride-feedback {
+      margin-top: 1rem;
+      padding: 0.95rem;
+      border-radius: 16px;
+      background: rgba(255,255,255,0.7);
+      border: 1px solid var(--line);
       color: var(--muted);
-      font-size: 0.95rem;
+      min-height: 72px;
     }
 
-    .checklist {
-      display: grid;
-      gap: 0.55rem;
-      color: var(--muted);
-      margin: 1rem 0 0;
+    .snapshot img {
+      border-radius: 18px;
+      aspect-ratio: 3 / 4;
+      object-fit: cover;
+      margin-top: .8rem;
+      border: 1px solid rgba(255,255,255,0.58);
     }
 
-    .checklist span::before {
-      content: "✓";
-      color: var(--gold-deep);
-      font-weight: 800;
-      margin-right: 0.55rem;
+    .graph-box {
+      margin-top: 1rem;
+      border-radius: 18px;
+      padding: 1rem;
+      background: linear-gradient(180deg, rgba(15,132,184,0.06), rgba(255,194,141,0.12));
+      border: 1px solid rgba(15,132,184,0.12);
     }
 
-    footer {
+    .graph-note {
+      margin-top: .7rem;
+      font-size: .95rem;
+    }
+
+    .footer {
       padding: 2.5rem 0 3rem;
-      color: var(--muted);
       text-align: center;
-      font-size: 0.92rem;
+      color: var(--muted);
+      font-size: .93rem;
     }
 
     @media (max-width: 980px) {
       .hero-grid,
-      .cta-band,
-      .benefit-grid,
-      .ingredient-grid,
-      .testimonial-grid,
-      .faq-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .pill-row,
-      .stat-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
-
-      .nav {
-        flex-direction: column;
-        justify-content: center;
-        padding: 1rem 0;
-      }
+      .learn-grid,
+      .concept-grid,
+      .snapshot-grid,
+      .quiz-grid,
+      .mini-game-grid,
+      .stats { grid-template-columns: 1fr; }
+      .nav { flex-direction: column; justify-content: center; padding: 1rem 0; }
     }
 
     @media (max-width: 640px) {
-      .container {
-        width: min(100% - 1rem, var(--max));
-      }
-
-      .hero { padding-top: 2rem; }
-
-      .copy-card,
-      .gallery-card,
-      .section-card { padding: 1rem; }
-
-      .pill-row,
-      .stat-grid,
-      .thumbs {
-        grid-template-columns: 1fr;
-      }
-
-      .nav-links,
-      .nav-cta {
-        justify-content: center;
-      }
+      .container { width: min(100% - 1rem, var(--max)); }
+      .hero-copy, .hero-art, .section-card { padding: 1rem; }
+      .nav-links, .nav-cta { justify-content: center; }
+      .scene { min-height: 420px; }
+      .flash-badge { position: static; margin: 1rem; max-width: none; }
+      .coaster-track { width: 72%; left: 10%; }
+      .coaster-car { right: 28%; }
     }
   </style>
 </head>
 <body>
-  <header class="topbar">
+  <header class="nav-wrap">
     <div class="container nav">
-      <nav class="nav-links" aria-label="Primary">
-        <a href="#product">Shop</a>
-        <a href="#benefits">Build Your Routine</a>
-        <a href="#inside">Inside Thena</a>
-        <a href="#reviews">Reviews</a>
+      <div class="brand">Santa Monica Motion Coaster</div>
+      <nav class="nav-links">
+        <a href="#learn">Learn</a>
+        <a href="#game">Coaster Game</a>
+        <a href="#quiz">Quiz</a>
+        <a href="#notes">Your Notes</a>
       </nav>
-      <a class="brand" href="#top">Thena</a>
       <div class="nav-cta">
-        <a href="#buy" class="btn secondary">Learn more</a>
-        <a href="#buy" class="btn">Shop now</a>
+        <a class="btn secondary" href="#notes">See study guide</a>
+        <a class="btn" href="#quiz">Start quiz</a>
       </div>
     </div>
   </header>
 
-  <main id="top">
+  <main>
     <section class="hero">
       <div class="container hero-grid">
-        <div class="gallery-card" id="product">
-          <div class="product-frame">
-            <img src="assets/thena-product.jpg" alt="Thena unflavored protein, collagen, and creatine supplement jar">
+        <div class="hero-copy">
+          <div class="kicker">Motion formative prep</div>
+          <h1>Study motion like you’re riding a beachside roller coaster.</h1>
+          <p class="subhead">I turned your science notes into a one-page interactive study guide with quick explainers, graph reading help, a coaster game, and quiz questions. The whole thing uses a Santa Monica pier vibe so it feels less like homework and more like a challenge run.</p>
+          <div class="stats">
+            <div class="stat"><strong>7 core ideas</strong>motion, speed, velocity, acceleration, vectors, graphs, gravity</div>
+            <div class="stat"><strong>Interactive game</strong>classify motion changes as your coaster moves</div>
+            <div class="stat"><strong>Quiz mode</strong>practice the exact kinds of concepts in your notes</div>
           </div>
-          <div class="thumbs" aria-label="Highlights">
-            <div class="thumb">Unflavored</div>
-            <div class="thumb">20g Protein</div>
-            <div class="thumb">10g Collagen</div>
-            <div class="thumb">5g Creatine</div>
+          <div class="nav-cta">
+            <a class="btn" href="#learn">Learn the concepts</a>
+            <a class="btn secondary" href="#game">Play the game</a>
           </div>
         </div>
 
-        <div class="copy-card">
-          <div class="kicker">Daily strength, simplified</div>
-          <div class="rating-row">
-            <span class="stars">★★★★★</span>
-            <span>Minimal formula • clean look • easy daily stack</span>
-          </div>
-          <h1>One scoop. Fewer bottles. A cleaner routine.</h1>
-          <p class="subhead">Thena is designed as a premium all-in-one daily performance blend with the elegant, minimal feel your product already suggests. Inspired by modern supplement merchandising, this one-page homepage puts the jar front and center and leans into your cream-and-gold palette.</p>
-
-          <div class="stat-grid">
-            <div class="stat-box">
-              <strong>20g</strong>
-              Protein per serving
+        <div class="hero-art">
+          <div class="scene">
+            <div class="sun"></div>
+            <div class="coaster-car"></div>
+            <svg class="coaster-track" viewBox="0 0 600 220" preserveAspectRatio="none" aria-hidden="true">
+              <path d="M10 180 C 90 178, 120 180, 175 130 S 290 15, 355 95 S 455 210, 590 40" stroke="#214d63" stroke-width="12" fill="none" stroke-linecap="round"/>
+              <path d="M10 180 C 90 178, 120 180, 175 130 S 290 15, 355 95 S 455 210, 590 40" stroke="#ffd8a2" stroke-width="5" fill="none" stroke-linecap="round"/>
+              <line x1="58" y1="182" x2="58" y2="220" stroke="#214d63" stroke-width="8"/>
+              <line x1="130" y1="175" x2="130" y2="220" stroke="#214d63" stroke-width="8"/>
+              <line x1="210" y1="94" x2="210" y2="220" stroke="#214d63" stroke-width="8"/>
+              <line x1="294" y1="39" x2="294" y2="220" stroke="#214d63" stroke-width="8"/>
+              <line x1="378" y1="110" x2="378" y2="220" stroke="#214d63" stroke-width="8"/>
+              <line x1="465" y1="166" x2="465" y2="220" stroke="#214d63" stroke-width="8"/>
+              <line x1="538" y1="86" x2="538" y2="220" stroke="#214d63" stroke-width="8"/>
+            </svg>
+            <div class="ocean-band"></div>
+            <div class="pier"></div>
+            <div class="sand-band"></div>
+            <div class="flash-badge">
+              <strong>Fast memory hook</strong>
+              Speed = how fast<br>
+              Velocity = how fast + direction<br>
+              Acceleration = how velocity changes
             </div>
-            <div class="stat-box">
-              <strong>10g</strong>
-              Collagen per serving
-            </div>
-            <div class="stat-box">
-              <strong>5g</strong>
-              Creatine per serving
-            </div>
-          </div>
-
-          <div class="pill-row" role="list" aria-label="Product callouts">
-            <div class="pill">Unflavored</div>
-            <div class="pill">Gluten free</div>
-            <div class="pill">Made in USA</div>
-            <div class="pill">One scoop replaces 5+ supplements</div>
           </div>
         </div>
       </div>
     </section>
 
-    <section class="section" id="benefits">
+    <section class="section" id="learn">
       <div class="container section-card">
-        <h2>Built like a premium product page, not a generic template.</h2>
-        <p class="section-lead">The structure follows the clean, conversion-friendly feel of the Ora reference: strong product image, direct headline, ingredient-first proof points, and simple purchase momentum. But visually, this stays entirely in Thena’s warmer luxury palette.</p>
-        <div class="benefit-grid">
-          <article class="benefit">
-            <div class="icon">1</div>
-            <h3>Luxury minimal aesthetic</h3>
-            <p>Soft cream backgrounds, muted neutrals, and warm gold accents make the brand feel premium, calm, and modern.</p>
+        <h2>Learn the motion basics</h2>
+        <p class="section-lead">Everything here is pulled from your distilled study guide, just cleaned up and organized so it’s easier to remember.</p>
+        <div class="learn-grid">
+          <article class="card">
+            <div class="tag">Motion</div>
+            <h3>Motion + reference point</h3>
+            <p><strong>Motion</strong> is a change in position compared to a reference point. A <strong>reference point</strong> is the thing you compare motion to.</p>
           </article>
-          <article class="benefit">
-            <div class="icon">2</div>
-            <h3>Product-first layout</h3>
-            <p>The jar gets hero treatment immediately, so the homepage feels like a polished direct-to-consumer product launch.</p>
+          <article class="card">
+            <div class="tag">Relative motion</div>
+            <h3>Depends on the observer</h3>
+            <p><strong>Relative motion</strong> means motion can look different depending on who is observing it. What looks still to one observer can look like motion to another.</p>
           </article>
-          <article class="benefit">
-            <div class="icon">3</div>
-            <h3>Ready for expansion</h3>
-            <p>This page can easily grow into a fuller storefront later with flavor variants, cart flows, subscriptions, and FAQs.</p>
+          <article class="card">
+            <div class="tag">Vectors</div>
+            <h3>Magnitude + direction</h3>
+            <p><strong>Vectors</strong> have both size and direction. That matters for velocity because velocity is not just a number — it tells where the object is going too.</p>
           </article>
+          <article class="card">
+            <div class="tag">Speed</div>
+            <h3>How fast, no direction</h3>
+            <p><strong>Speed</strong> is magnitude only, with no direction. Units: <strong>m/s</strong>. Formula: <strong>speed = distance ÷ time</strong>.</p>
+          </article>
+          <article class="card">
+            <div class="tag">Velocity</div>
+            <h3>Speed with direction</h3>
+            <p><strong>Velocity</strong> is speed with direction. Units can look like <strong>m/s north</strong>. In your notes: <strong>velocity = change in distance ÷ change in time</strong>.</p>
+          </article>
+          <article class="card">
+            <div class="tag">Acceleration</div>
+            <h3>Change in velocity over time</h3>
+            <p><strong>Acceleration</strong> tells you how velocity changes over time. Units: <strong>m/s²</strong>. Formula: <strong>(v<sub>f</sub> - v<sub>i</sub>) ÷ t</strong>.</p>
+          </article>
+        </div>
+
+        <div class="concept-grid">
+          <article class="formula-box">
+            <h3>When is something accelerating?</h3>
+            <p>Acceleration can happen when an object is <strong>speeding up</strong>, <strong>slowing down</strong>, or <strong>changing direction</strong>.</p>
+          </article>
+          <article class="formula-box">
+            <h3>Distance vs. time graph</h3>
+            <p>Straight line = <strong>constant speed</strong><br>Steeper line = <strong>faster</strong><br>Curved up = <strong>accelerating</strong><br>Flat line = <strong>stopped</strong><br><strong>Slope = speed</strong></p>
+          </article>
+          <article class="formula-box">
+            <h3>Velocity vs. time graph</h3>
+            <p>Flat line = <strong>no acceleration</strong><br>Slanted up = <strong>speeding up</strong><br>Slanted down = <strong>slowing down</strong><br><strong>Slope = acceleration</strong></p>
+          </article>
+        </div>
+
+        <div class="graph-box">
+          <h3>Extra fact from your study guide</h3>
+          <p><strong>Earth’s gravity = 9.8 m/s²</strong></p>
+          <p class="graph-note">From your sample graph: segment <strong>a = 1/2 m/s</strong>, <strong>b = 0 m/s</strong>, <strong>c = 2 m/s</strong>, and the <strong>average speed = 5/7 m/s</strong>.</p>
         </div>
       </div>
     </section>
 
-    <section class="section" id="inside">
+    <section class="section" id="game">
       <div class="container section-card">
-        <h2>What’s inside Thena</h2>
-        <p class="section-lead">The homepage frames the formula around simplicity and daily use. Each callout is laid out in a way that feels easy to scan and easy to trust.</p>
-        <div class="ingredient-grid">
-          <article class="ingredient">
-            <div class="icon">P</div>
-            <h3>Protein</h3>
-            <p><strong>20g per serving</strong><br>Anchors the formula with the primary macro people expect in a daily blend.</p>
-          </article>
-          <article class="ingredient">
-            <div class="icon">C</div>
-            <h3>Collagen</h3>
-            <p><strong>10g per serving</strong><br>Adds a second major pillar and makes the formula feel more complete than a basic protein jar.</p>
-          </article>
-          <article class="ingredient">
-            <div class="icon">Cr</div>
-            <h3>Creatine</h3>
-            <p><strong>5g per serving</strong><br>Positioned as the simple daily scoop that helps reduce supplement clutter.</p>
-          </article>
-          <article class="ingredient">
-            <div class="icon">✓</div>
-            <h3>Clean routine feel</h3>
-            <p><strong>Unflavored format</strong><br>Designed to look versatile, stackable, and easy to fit into a daily ritual.</p>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section class="section" id="reviews">
-      <div class="container section-card">
-        <h2>The kind of page customers expect from a modern wellness brand.</h2>
-        <p class="section-lead">These testimonial blocks are placeholder social proof so the page feels complete on day one. They can be swapped later for real customer quotes, clinician validation, or press mentions.</p>
-        <div class="testimonial-grid">
-          <article class="testimonial">
-            <h3>“Finally, a formula that feels less chaotic.”</h3>
-            <p>“The product story is clear immediately: one scoop, fewer bottles, clean design. It feels elevated instead of loud.”</p>
-          </article>
-          <article class="testimonial">
-            <h3>“Looks premium before you even read the label.”</h3>
-            <p>“The cream-and-gold direction makes Thena feel polished, soft, and expensive in the right way.”</p>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section class="section" id="buy">
-      <div class="container section-card">
-        <div class="cta-band">
-          <div>
-            <div class="kicker">Starter offer</div>
-            <h2>Launch with a clean, confident one-page storefront.</h2>
-            <p class="section-lead">This section mimics the purchase momentum of a top-tier supplement PDP: clear headline, simple pricing, strong primary CTA, and supportive trust signals beneath it.</p>
-            <div class="price">
-              <span class="main">$39</span>
-              <span class="sub">per jar • subscribe & save ready</span>
+        <h2>Coaster control game</h2>
+        <p class="section-lead">Each stop on the ride describes what the car is doing. Pick the best science idea before moving to the next part of the track.</p>
+        <div class="mini-game-grid">
+          <div class="coaster-terminal">
+            <div class="tag">Ride simulator</div>
+            <h3 id="rideTitle">Stop 1: Leaving the station</h3>
+            <p id="ridePrompt">The coaster starts moving in a straight line at a steady rate. Which idea best matches what is happening?</p>
+            <div class="ride-area">
+              <svg class="ride-track" viewBox="0 0 600 220" preserveAspectRatio="none" aria-hidden="true">
+                <path d="M20 150 L130 150 L220 110 L320 110 L430 65 L580 65" stroke="#194b62" stroke-width="12" fill="none" stroke-linecap="round"/>
+                <path d="M20 150 L130 150 L220 110 L320 110 L430 65 L580 65" stroke="#fff0cb" stroke-width="4" fill="none" stroke-linecap="round"/>
+              </svg>
+              <div class="ride-car" id="rideCar"></div>
             </div>
-            <div class="nav-cta">
-              <a href="#top" class="btn">Add to cart</a>
-              <a href="#inside" class="btn secondary">See formula</a>
+            <div class="ride-feedback" id="rideFeedback">Choose an answer to move the coaster.</div>
+          </div>
+
+          <div class="game-panel">
+            <div class="tag">Choose the motion idea</div>
+            <div class="option-row" id="rideOptions"></div>
+            <div class="scorebar">
+              <span id="rideProgress">Coaster progress: 0 / 4</span>
+              <button class="btn secondary" id="resetRideBtn">Reset ride</button>
             </div>
           </div>
-          <div class="faq-grid">
-            <article class="faq">
-              <h3>What this page is doing well</h3>
-              <p>It sells the feeling of the brand first, then supports it with ingredients, proof points, and clean visual hierarchy.</p>
-            </article>
-            <article class="faq">
-              <h3>Easy next step</h3>
-              <p>Add real product photography, true pricing, flavor options, and checkout logic when you’re ready to turn this into a full store.</p>
-            </article>
-          </div>
         </div>
-        <div class="checklist" aria-label="Trust signals">
-          <span>Warm luxury palette pulled from your packaging</span>
-          <span>One-page homepage modeled after a modern wellness product flow</span>
-          <span>Live-ready static page that can expand into ecommerce later</span>
+      </div>
+    </section>
+
+    <section class="section" id="quiz">
+      <div class="container section-card">
+        <h2>Quick practice quiz</h2>
+        <p class="section-lead">These questions are built straight from your notes, especially the definitions and graph rules.</p>
+        <div id="quizArea"></div>
+        <div class="scorebar">
+          <span id="quizScore">Quiz score: 0 / 6</span>
+          <button class="btn secondary" id="resetQuizBtn">Reset quiz</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="notes">
+      <div class="container section-card">
+        <h2>Your original study snapshots</h2>
+        <p class="section-lead">I kept your note photos here too, so you can compare the interactive version with the exact pages you wrote.</p>
+        <div class="snapshot-grid">
+          <article class="snapshot">
+            <h3>Page 1</h3>
+            <p>Speed, velocity, and acceleration definitions.</p>
+            <img src="assets/motion-notes-1.jpg" alt="Notebook page with motion study guide notes on speed, velocity, and acceleration">
+          </article>
+          <article class="snapshot">
+            <h3>Page 2</h3>
+            <p>Motion, reference point, relative motion, vectors, and velocity-time graph notes.</p>
+            <img src="assets/motion-notes-2.jpg" alt="Notebook page with motion, reference point, relative motion, vectors, and velocity versus time notes">
+          </article>
+          <article class="snapshot">
+            <h3>Page 3</h3>
+            <p>Distance-time graph notes, Earth’s gravity, and sample graph calculations.</p>
+            <img src="assets/motion-notes-3.jpg" alt="Notebook page with distance versus time notes, Earth's gravity, and example graph speeds">
+          </article>
         </div>
       </div>
     </section>
   </main>
 
-  <footer>
-    Thena — premium daily essentials, presented with a cleaner rhythm.
+  <footer class="footer">
+    Santa Monica Motion Coaster — built from your science notes so studying feels less grim.
   </footer>
+
+  <script>
+    const rideSteps = [
+      {
+        title: 'Stop 1: Leaving the station',
+        prompt: 'The coaster starts moving in a straight line at a steady rate. Which idea best matches what is happening?',
+        answer: 'constant speed',
+        options: ['constant speed', 'slowing down', 'changing direction', 'stopped'],
+        feedback: 'Yep — a straight, steady motion means constant speed.',
+        position: { left: '17%', top: '58%', rotate: '0deg' }
+      },
+      {
+        title: 'Stop 2: Climbing the track',
+        prompt: 'The line on a distance vs. time graph gets steeper. What does that mean?',
+        answer: 'faster speed',
+        options: ['faster speed', 'no acceleration', 'stopped', 'relative motion'],
+        feedback: 'Correct — on a distance vs. time graph, a steeper slope means faster speed.',
+        position: { left: '33%', top: '42%', rotate: '-18deg' }
+      },
+      {
+        title: 'Stop 3: Coasting flat',
+        prompt: 'A velocity vs. time graph shows a flat line. What does that tell you?',
+        answer: 'no acceleration',
+        options: ['no acceleration', 'speeding up', 'curved up', 'gravity increases'],
+        feedback: 'Right — on a velocity vs. time graph, a flat line means no acceleration.',
+        position: { left: '50%', top: '42%', rotate: '0deg' }
+      },
+      {
+        title: 'Stop 4: Sharp turn into the drop',
+        prompt: 'The coaster keeps moving but changes direction. Is that acceleration?',
+        answer: 'yes, because velocity changes',
+        options: ['yes, because velocity changes', 'no, because speed stayed the same', 'only if it stops first', 'only if gravity is zero'],
+        feedback: 'Exactly — changing direction changes velocity, so that is acceleration.',
+        position: { left: '73%', top: '21%', rotate: '-8deg' }
+      }
+    ];
+
+    const quizQuestions = [
+      {
+        question: 'Which quantity has magnitude only and no direction?',
+        answer: 'speed',
+        options: ['speed', 'velocity', 'acceleration', 'vector']
+      },
+      {
+        question: 'Velocity is best described as…',
+        answer: 'speed with direction',
+        options: ['distance over mass', 'speed with direction', 'change in force', 'motion with no reference point']
+      },
+      {
+        question: 'What does a flat line on a distance vs. time graph mean?',
+        answer: 'stopped',
+        options: ['speeding up', 'stopped', 'moving north', 'relative motion']
+      },
+      {
+        question: 'On a velocity vs. time graph, slope represents…',
+        answer: 'acceleration',
+        options: ['speed', 'distance', 'acceleration', 'gravity only']
+      },
+      {
+        question: 'What is Earth’s gravity according to your notes?',
+        answer: '9.8 m/s²',
+        options: ['5/7 m/s', '9.8 m/s²', '2 m/s', '1/2 m/s²']
+      },
+      {
+        question: 'Acceleration can happen when an object is…',
+        answer: 'speeding up, slowing down, or changing direction',
+        options: ['only speeding up', 'only slowing down', 'speeding up, slowing down, or changing direction', 'only moving north']
+      }
+    ];
+
+    let rideIndex = 0;
+    let rideScore = 0;
+    const rideTitle = document.getElementById('rideTitle');
+    const ridePrompt = document.getElementById('ridePrompt');
+    const rideOptions = document.getElementById('rideOptions');
+    const rideFeedback = document.getElementById('rideFeedback');
+    const rideCar = document.getElementById('rideCar');
+    const rideProgress = document.getElementById('rideProgress');
+
+    function setRideCar(position) {
+      rideCar.style.left = position.left;
+      rideCar.style.top = position.top;
+      rideCar.style.transform = `rotate(${position.rotate})`;
+    }
+
+    function renderRideStep() {
+      const step = rideSteps[rideIndex];
+      rideTitle.textContent = step.title;
+      ridePrompt.textContent = step.prompt;
+      rideOptions.innerHTML = '';
+      step.options.forEach(option => {
+        const btn = document.createElement('button');
+        btn.textContent = option;
+        btn.addEventListener('click', () => checkRideAnswer(btn, option));
+        rideOptions.appendChild(btn);
+      });
+      rideProgress.textContent = `Coaster progress: ${rideIndex} / ${rideSteps.length}`;
+    }
+
+    function checkRideAnswer(button, option) {
+      const step = rideSteps[rideIndex];
+      [...rideOptions.children].forEach(btn => btn.disabled = true);
+      if (option === step.answer) {
+        button.classList.add('correct');
+        rideFeedback.textContent = step.feedback;
+        rideScore += 1;
+        setRideCar(step.position);
+      } else {
+        button.classList.add('wrong');
+        [...rideOptions.children].forEach(btn => {
+          if (btn.textContent === step.answer) btn.classList.add('correct');
+        });
+        rideFeedback.textContent = `Not quite. The best answer was “${step.answer}.” ${step.feedback}`;
+      }
+
+      rideIndex += 1;
+      rideProgress.textContent = `Coaster progress: ${rideIndex} / ${rideSteps.length}`;
+
+      setTimeout(() => {
+        if (rideIndex < rideSteps.length) {
+          renderRideStep();
+        } else {
+          rideTitle.textContent = 'Ride complete!';
+          ridePrompt.textContent = `You finished the coaster challenge with ${rideScore} out of ${rideSteps.length} correct.`;
+          rideOptions.innerHTML = '<button class="correct" disabled>Nice run — reset to play again.</button>';
+          rideFeedback.textContent = 'If you can explain why each segment matched its answer, you’re in solid shape for the formative.';
+        }
+      }, 950);
+    }
+
+    function resetRide() {
+      rideIndex = 0;
+      rideScore = 0;
+      setRideCar({ left: '8%', top: '56%', rotate: '0deg' });
+      rideFeedback.textContent = 'Choose an answer to move the coaster.';
+      renderRideStep();
+    }
+
+    document.getElementById('resetRideBtn').addEventListener('click', resetRide);
+
+    const quizArea = document.getElementById('quizArea');
+    const quizScore = document.getElementById('quizScore');
+    let currentQuizScore = 0;
+
+    function renderQuiz() {
+      currentQuizScore = 0;
+      quizArea.innerHTML = '<div class="quiz-grid"></div>';
+      const grid = quizArea.querySelector('.quiz-grid');
+
+      quizQuestions.forEach((item, index) => {
+        const card = document.createElement('article');
+        card.className = 'question-card';
+        card.innerHTML = `<div class="tag">Question ${index + 1}</div><h3>${item.question}</h3>`;
+
+        const options = document.createElement('div');
+        options.className = 'option-row';
+        item.options.forEach(option => {
+          const btn = document.createElement('button');
+          btn.textContent = option;
+          btn.addEventListener('click', () => {
+            if (card.dataset.answered === 'true') return;
+            card.dataset.answered = 'true';
+            [...options.children].forEach(child => {
+              child.disabled = true;
+              if (child.textContent === item.answer) child.classList.add('correct');
+            });
+            if (option === item.answer) {
+              btn.classList.add('correct');
+              currentQuizScore += 1;
+            } else {
+              btn.classList.add('wrong');
+            }
+            quizScore.textContent = `Quiz score: ${currentQuizScore} / ${quizQuestions.length}`;
+          });
+          options.appendChild(btn);
+        });
+        card.appendChild(options);
+        grid.appendChild(card);
+      });
+
+      quizScore.textContent = `Quiz score: 0 / ${quizQuestions.length}`;
+    }
+
+    document.getElementById('resetQuizBtn').addEventListener('click', renderQuiz);
+
+    resetRide();
+    renderQuiz();
+  </script>
 </body>
 </html>
